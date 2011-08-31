@@ -11,8 +11,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        ventana.cpp
+        ventana.cpp \
+    mapa.cpp
 
-HEADERS  += ventana.h
+HEADERS  += ventana.h \
+    mapa.h
 
 FORMS    += ventana.ui
