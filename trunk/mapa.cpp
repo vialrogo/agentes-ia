@@ -18,4 +18,5 @@ void Mapa::mousePressEvent(QGraphicsSceneMouseEvent* mouseevent)
         cout<<"Click Izquierdo";
 
     cout<<" en la posición ["<< xpos << ","<< ypos <<"]"<<endl;
+
 }
