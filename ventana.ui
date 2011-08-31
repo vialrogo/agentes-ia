@@ -10,8 +10,23 @@
     <height>620</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>492</width>
+    <height>620</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>492</width>
+    <height>620</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Ventana</string>
+  </property>
+  <property name="locale">
+   <locale language="Spanish" country="Colombia"/>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="botonDefineMap">
