@@ -2,6 +2,7 @@
 #define MAPA_H
 
 #include <QGraphicsScene>
+#include <QGraphicsRectItem>
 #include <QGraphicsSceneMouseEvent>
 #include <iostream>
 
@@ -11,8 +12,18 @@ class Mapa: public QGraphicsScene
 {
 
 public:
-    Mapa();
+    int** matriz;
+    int n;
+    int m;
+
+    Mapa(int ancho, int alto);
     void mousePressEvent(QGraphicsSceneMouseEvent* event);
+    void crearCuadros();
+
+private:
+    int W;
+    int H;
+    QGraphicsRectItem*** cuadros;
 };
 
 #endif // MAPA_H
