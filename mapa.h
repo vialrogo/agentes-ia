@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <QGraphicsSceneMouseEvent>
+#include <QPixmap>
 #include <iostream>
 
 using namespace std;
