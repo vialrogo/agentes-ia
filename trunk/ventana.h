@@ -3,7 +3,10 @@
 
 #include <QMainWindow>
 #include <QGraphicsLineItem>
+#include <iostream>
 #include <mapa.h>
+
+using namespace std;
 
 namespace Ui {
     class Ventana;
@@ -17,9 +20,16 @@ public:
     explicit Ventana(QWidget *parent = 0);
     ~Ventana();
     Mapa* mapita;
+    int W;
+    int H;
 
 private:
     Ui::Ventana *ui;
+    void borrarMapa();
+    void pintarCuadricula(int n, int m);
+
+public slots:
+    void definirMapa();
 };
 
 #endif // VENTANA_H

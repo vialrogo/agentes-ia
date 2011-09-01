@@ -12,9 +12,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         ventana.cpp \
-    mapa.cpp
+    mapa.cpp \
+    algoritmos.cpp
 
 HEADERS  += ventana.h \
-    mapa.h
+    mapa.h \
+    algoritmos.h
 
 FORMS    += ventana.ui
