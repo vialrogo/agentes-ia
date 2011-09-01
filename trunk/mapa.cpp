@@ -57,7 +57,8 @@ void Mapa::crearCuadros()
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
             cuadros[i][j]= new QGraphicsRectItem(j*anchoCelda,i*altoCelda,anchoCelda,altoCelda,0,0);
-            cuadros[i][j]->setBrush(Qt::blue);
+//            cuadros[i][j]->setBrush(Qt::blue);                         //Color de los cuadros de relleno
+            cuadros[i][j]->setBrush(QPixmap ("Imagenes/muro_2.jpg"));  //Imagen de los cuadros de relleno
             cuadros[i][j]->setFlag( QGraphicsItem::ItemIsMovable );
         }
     }
