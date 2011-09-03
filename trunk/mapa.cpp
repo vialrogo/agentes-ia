@@ -8,6 +8,7 @@ Mapa::Mapa(int ancho, int alto)
     m=1;
 
     matriz= new int*[n];
+
     for (int i = 0; i < n; ++i)
         matriz[i]=new int[m];
 

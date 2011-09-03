@@ -11,6 +11,7 @@ Ventana::Ventana(QWidget *parent) :
     H=429;
     mapita = new Mapa(W,H);
     mapita->setSceneRect(0,0,W,H);
+
     ui->graphicsView->setScene(mapita);
 
     connect(ui->actionQuit, SIGNAL(triggered()),this,SLOT(close()));
