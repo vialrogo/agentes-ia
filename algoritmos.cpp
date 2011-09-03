@@ -2,6 +2,7 @@
 
 Algoritmos::Algoritmos()
 {
+
 }
 
 QPoint* Algoritmos::moverseCirculos(int **mapa, int wMapa, int hMapa, QPoint* posInicial, QPoint* posMeta)

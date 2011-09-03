@@ -26,5 +26,4 @@ private:
     int H;
     QGraphicsRectItem*** cuadros;
 };
-
 #endif // MAPA_H
