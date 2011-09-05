@@ -7,7 +7,7 @@ Ventana::Ventana(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    W=469;
+    W=471;
     H=429;
     mapita = new Mapa(W,H);
     mapita->setSceneRect(0,0,W,H);
