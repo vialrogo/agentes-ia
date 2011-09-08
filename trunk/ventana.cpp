@@ -16,6 +16,7 @@ Ventana::Ventana(QWidget *parent) :
 
     connect(ui->actionQuit, SIGNAL(triggered()),this,SLOT(close()));
     connect(ui->botonDefineMap, SIGNAL(clicked()),this,SLOT(definirMapa()));
+    connect(ui->botonRun,SIGNAL(clicked()),this,SLOT(run()));
 }
 
 Ventana::~Ventana()
@@ -68,4 +69,9 @@ void Ventana::definirMapa()
 
         mapita->crearCuadros();
     }
+}
+
+void Ventana::run()
+{
+    cout<<"run run"<<endl;
 }
