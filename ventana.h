@@ -30,6 +30,7 @@ private:
 
 public slots:
     void definirMapa();
+    void run();
 };
 
 #endif // VENTANA_H

@@ -2,12 +2,13 @@
 #define ALGORITMOS_H
 
 #include <QPoint>
+#include <QVector>
 
 class Algoritmos
 {
 public:
     Algoritmos();
 
-    QPoint* moverseCirculos(int** mapa, int wMapa, int hMapa, QPoint* posInicial, QPoint* posMeta);
+    QVector<QPoint*> moverseCirculos(int** mapa, int wMapa, int hMapa, QPoint* posInicial, QPoint* posMeta);
 };
 #endif // ALGORITMOS_H
