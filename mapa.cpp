@@ -42,10 +42,26 @@ void Mapa::crearCuadros()
         cuadros[i] = new QGraphicsRectItem*[m];
     }
 
+    int a=0,b=0,c=0,d=0,e=0,f=0,g=0;
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
             cuadros[i][j]= new QGraphicsRectItem(j*anchoCelda,i*altoCelda,anchoCelda,altoCelda,0,0);
-            cuadros[i][j]->setBrush(QPixmap ("Imagenes/muro_2.jpg"));  //Imagen de los cuadros de relleno
+//Aqui quedé, falta agregar banderas y terminar el switch para pintar el mapa.
+//            switch(matriz[i][j])
+//            {
+//                case -2:
+//                if(b==0){
+//                    if(matriz[i+1][j]==-2) cuadros[i][j]->setBrush(QPixmap ("Imagenes/B-1-hz.jpg"));
+//                    else cuadros[i][j]->setBrush(QPixmap ("Imagenes/B-1-vl.jpg"));
+//                }
+//                else{
+//                    if(matriz[i][j-1]==-2)
+//                }
+
+//                        break;
+//            }
+
+            cuadros[i][j]->setBrush(QPixmap ("Imagenes/A-2.png"));  //Imagen de los cuadros de relleno
         }
     }
 }

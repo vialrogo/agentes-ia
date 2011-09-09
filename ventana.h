@@ -29,7 +29,7 @@ private:
     Ui::Ventana *ui;
     void borrarMapa();
     void pintarCuadricula(int n, int m);
-    void definirMapa(int n, int m);
+//    void definirMapa(int n, int m);
 
 public slots:
     void correr();
