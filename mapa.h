@@ -18,7 +18,7 @@ public:
     int m;
 
     Mapa(int ancho, int alto);
-    void mousePressEvent(QGraphicsSceneMouseEvent* event);
+    void ponerQuitarCuadro(int xCelda, int yCelda);
     void crearCuadros();
 
 private:

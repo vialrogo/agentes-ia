@@ -3,7 +3,9 @@
 
 #include <QMainWindow>
 #include <QGraphicsLineItem>
+#include <QFileDialog>
 #include <iostream>
+#include <fstream>
 #include <mapa.h>
 
 using namespace std;
@@ -27,10 +29,11 @@ private:
     Ui::Ventana *ui;
     void borrarMapa();
     void pintarCuadricula(int n, int m);
+    void definirMapa(int n, int m);
 
 public slots:
-    void definirMapa();
-    void run();
+    void correr();
+    void cargarArchivo();
 };
 
 #endif // VENTANA_H

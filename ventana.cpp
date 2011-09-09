@@ -13,10 +13,11 @@ Ventana::Ventana(QWidget *parent) :
     mapita->setSceneRect(0,0,W,H);
 
     ui->graphicsView->setScene(mapita);
+    definirMapa(7,7);
 
     connect(ui->actionQuit, SIGNAL(triggered()),this,SLOT(close()));
-    connect(ui->botonDefineMap, SIGNAL(clicked()),this,SLOT(definirMapa()));
-    connect(ui->botonRun,SIGNAL(clicked()),this,SLOT(run()));
+    connect(ui->botonRun,SIGNAL(clicked()),this,SLOT(correr()));
+    connect(ui->actionLoad_map,SIGNAL(triggered()),this,SLOT(cargarArchivo()));
 }
 
 Ventana::~Ventana()
@@ -39,23 +40,18 @@ void Ventana::pintarCuadricula(int n, int m)
     for (int i = 0; i <=m; ++i)
     {
         QGraphicsLineItem *line = new QGraphicsLineItem(i*ancho,0,i*ancho,n*alto);
-        line->setFlag( QGraphicsItem::ItemIsMovable );
         mapita->addItem(line);
     }
 
     for (int i = 0; i <= n; ++i)
     {
         QGraphicsLineItem *line = new QGraphicsLineItem(0,i*alto,m*ancho,i*alto);
-        line->setFlag( QGraphicsItem::ItemIsMovable );
         mapita->addItem(line);
     }
 }
 
-void Ventana::definirMapa()
+void Ventana::definirMapa(int n, int m)
 {
-    int n = ui->spinBoxN->value(); //Numero de filas
-    int m = ui->spinBoxM->value(); //Numero de columnas
-
     if(n!=0 && m!=0)
     {
         pintarCuadricula(n,m);
@@ -71,7 +67,23 @@ void Ventana::definirMapa()
     }
 }
 
-void Ventana::run()
+void Ventana::cargarArchivo()
+{
+    QString rutaArchivo = QFileDialog::getOpenFileName();
+//    cout<<qPrintable(rutaArchivo)<<endl;
+
+    ifstream infile(qPrintable(rutaArchivo));
+
+    string line;
+
+    while(getline(infile, line))
+    {
+            cout << line << endl;
+    }
+}
+
+void Ventana::correr()
 {
     cout<<"run run"<<endl;
+    mapita->ponerQuitarCuadro(2,2);
 }
