@@ -11,32 +11,19 @@ Mapa::Mapa(int ancho, int alto)
 
     for (int i = 0; i < n; ++i)
         matriz[i]=new int[m];
-
-    crearCuadros();
 }
 
-void Mapa::mousePressEvent(QGraphicsSceneMouseEvent* mouseevent)
+void Mapa::ponerQuitarCuadro(int xCelda, int yCelda)
 {
-    QPointF posicion = mouseevent->scenePos();
-
-    double xpos = posicion.rx();
-    double ypos = posicion.ry();
-
-    int anchoCelda = (W/m);
-    int altoCelda = (H/n);
-
-    int yCelda = xpos/anchoCelda;
-    int xCelda = ypos/altoCelda;
 
     if(xCelda<n && yCelda<m)
     {
-        if(mouseevent->button()==Qt::RightButton)
+        if(this->items().contains(cuadros[xCelda][yCelda]))
         {
             matriz[xCelda][yCelda]=0;
             this->removeItem(cuadros[xCelda][yCelda]);
         }
-
-        if(mouseevent->button()==Qt::LeftButton)
+        else
         {
             matriz[xCelda][yCelda]=1;
             this->addItem(cuadros[xCelda][yCelda]);
@@ -58,9 +45,7 @@ void Mapa::crearCuadros()
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < m; ++j) {
             cuadros[i][j]= new QGraphicsRectItem(j*anchoCelda,i*altoCelda,anchoCelda,altoCelda,0,0);
-//            cuadros[i][j]->setBrush(Qt::blue);                         //Color de los cuadros de relleno
             cuadros[i][j]->setBrush(QPixmap ("Imagenes/muro_2.jpg"));  //Imagen de los cuadros de relleno
-            cuadros[i][j]->setFlag( QGraphicsItem::ItemIsMovable );
         }
     }
 }
