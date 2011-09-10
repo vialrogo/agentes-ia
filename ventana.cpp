@@ -38,6 +38,7 @@ void Ventana::borrarMapa()
 
 void Ventana::cargarArchivo()
 {
+    borrarMapa();
     mapita->matriz= new int*[7];
     for (int i = 0; i < 7; ++i)
         mapita->matriz[i]=new int[7];
