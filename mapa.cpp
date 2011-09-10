@@ -43,9 +43,14 @@ void Mapa::crearCuadros()
     }
 
     int a=0,b=0,c=0,d=0,e=0,f=0,g=0;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
+
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < m; ++j)
+        {
             cuadros[i][j]= new QGraphicsRectItem(j*anchoCelda,i*altoCelda,anchoCelda,altoCelda,0,0);
+            cuadros[i][j]->setPen(QColor(180,180,180,255));//Coloca el color de la cuadricula: R,G,B,alfa
+
 //Aqui quedé, falta agregar banderas y terminar el switch para pintar el mapa.
             switch(matriz[i][j])
             {
