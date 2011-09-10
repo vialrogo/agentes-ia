@@ -11,12 +11,15 @@ Ventana::Ventana(QWidget *parent) :
     H=455; //434 - 62
     mapita = new Mapa(W,H);
     mapita->setSceneRect(0,0,W,H);
-
     ui->graphicsView->setScene(mapita);
+
+    IsMapaCargado=false;
 
     connect(ui->actionQuit, SIGNAL(triggered()),this,SLOT(close()));
     connect(ui->botonRun,SIGNAL(clicked()),this,SLOT(correr()));
     connect(ui->actionLoad_map,SIGNAL(triggered()),this,SLOT(cargarArchivo()));
+    connect(ui->radioButtonInformed, SIGNAL(clicked()),this,SLOT(cargarComboBoxInfor()));
+    connect(ui->radioButtonUninformed, SIGNAL(clicked()),this,SLOT(cargarComboBoxUninfor()));
 }
 
 Ventana::~Ventana()
@@ -59,7 +62,6 @@ void Ventana::cargarArchivo()
     mapita->n=7;
 
     QString rutaArchivo = QFileDialog::getOpenFileName();
-//    cout<<qPrintable(rutaArchivo)<<endl;
     ifstream infile(qPrintable(rutaArchivo));
 
     char caracter;
@@ -106,10 +108,54 @@ void Ventana::cargarArchivo()
         cout<<endl;
     }
     mapita->crearCuadros();
+    IsMapaCargado=true;
+}
+
+void Ventana::cargarComboBoxInfor()
+{
+    while(ui->comboBoxAlgoritmos->count()>0)
+        ui->comboBoxAlgoritmos->removeItem(0);
+
+    ui->comboBoxAlgoritmos->addItem("Avara");
+    ui->comboBoxAlgoritmos->addItem("A*");
+}
+
+void Ventana::cargarComboBoxUninfor()
+{
+    while(ui->comboBoxAlgoritmos->count()>0)
+        ui->comboBoxAlgoritmos->removeItem(0);
+
+    ui->comboBoxAlgoritmos->addItem("Preferente por amplitud");
+    ui->comboBoxAlgoritmos->addItem("Costo uniforme");
+    ui->comboBoxAlgoritmos->addItem("Preferente por profundidad evitando ciclos");
 }
 
 void Ventana::correr()
 {
-    cout<<"run run"<<endl;
-    mapita->ponerQuitarCuadro(2,0);
+    QString Algoritmo = ui->comboBoxAlgoritmos->currentText();
+
+    if(!IsMapaCargado)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Debe primero selecionar un archivo de entrada.");
+        msgBox.exec();
+        return;
+    }
+
+    if(Algoritmo=="Select type of algorithm")
+    {
+        QMessageBox msgBox;
+        msgBox.setText("Por favor seleccione algún algoritmo de búsqueda.");
+        msgBox.exec();
+        return;
+    }
+
+    cout<<"bu"<<endl;
+
+//    Preferente por amplitud
+//    Costo uniforme
+//    Preferente por profundidad evitando ciclos
+//    Avara
+//    A*
+
 }

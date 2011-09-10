@@ -87,12 +87,7 @@
     </property>
     <item>
      <property name="text">
-      <string>New Item 1</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>New Item 2</string>
+      <string>Select type of algorithm</string>
      </property>
     </item>
    </widget>
@@ -106,10 +101,10 @@
      </rect>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton">
+   <widget class="QRadioButton" name="radioButtonInformed">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>260</x>
       <y>10</y>
       <width>109</width>
       <height>31</height>
@@ -124,10 +119,10 @@
      <string>Informed</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_2">
+   <widget class="QRadioButton" name="radioButtonUninformed">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>130</x>
       <y>10</y>
       <width>131</width>
       <height>31</height>
