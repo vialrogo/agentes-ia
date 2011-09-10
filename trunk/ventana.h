@@ -26,17 +26,18 @@ public:
     int W;
     int H;
     bool IsMapaCargado; //Global para saber si ya se cargó un mapa
+    QString nombreProjecto; //Es variable para que aparezca igual en about
 
 private:
     Ui::Ventana *ui;
     void borrarMapa();
-    void pintarCuadricula(int n, int m);
 
 public slots:
     void correr();
     void cargarArchivo();
     void cargarComboBoxInfor();
     void cargarComboBoxUninfor();
+    void acercaDe();
 };
 
 #endif // VENTANA_H
