@@ -7,13 +7,12 @@ Ventana::Ventana(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    W=476; //471 - 68
-    H=434; //429 - 62
+    W=455; //476 - 68
+    H=455; //434 - 62
     mapita = new Mapa(W,H);
     mapita->setSceneRect(0,0,W,H);
 
     ui->graphicsView->setScene(mapita);
-//    definirMapa(7,7); -> no se debe llamar. La funci´on ya no debe existir.
 
     connect(ui->actionQuit, SIGNAL(triggered()),this,SLOT(close()));
     connect(ui->botonRun,SIGNAL(clicked()),this,SLOT(correr()));
@@ -49,24 +48,6 @@ void Ventana::pintarCuadricula(int n, int m)
         mapita->addItem(line);
     }
 }
-
-//Comentado por la razon dada en el llamado en el constructor.
-//void Ventana::definirMapa(int n, int m)
-//{
-//    if(n!=0 && m!=0)
-//    {
-//        pintarCuadricula(n,m);
-
-//        mapita->matriz= new int*[n];
-//        for (int i = 0; i < n; ++i)
-//            mapita->matriz[i]=new int[m];
-
-//        mapita->m=m;
-//        mapita->n=n;
-
-//        mapita->crearCuadros();
-//    }
-//}
 
 void Ventana::cargarArchivo()
 {
