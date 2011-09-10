@@ -12,10 +12,23 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         ventana.cpp \
-    mapa.cpp
+    mapa.cpp \
+    algoritmos.cpp \
+    amplitud.cpp \
+    costouniforme.cpp \
+    profundidadevitandociclos.cpp \
+    avara.cpp \
+    aestrella.cpp
 
 HEADERS  += ventana.h \
-    mapa.h
+    mapa.h \
+    algoritmos.h \
+    amplitud.h \
+    costouniforme.h \
+    profundidadevitandociclos.h \
+    profundidadevitandociclos.h \
+    avara.h \
+    aestrella.h
 
 FORMS    += ventana.ui
 
@@ -49,5 +62,3 @@ OTHER_FILES += \
     Imagenes/A-2.png \
     Imagenes/A-1.png \
     Imagenes/A.png
-
-
