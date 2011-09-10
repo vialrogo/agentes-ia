@@ -130,5 +130,5 @@ void Ventana::cargarArchivo()
 void Ventana::correr()
 {
     cout<<"run run"<<endl;
-    mapita->ponerQuitarCuadro(2,2);
+    mapita->ponerQuitarCuadro(2,0);
 }
