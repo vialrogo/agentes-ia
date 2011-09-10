@@ -12,12 +12,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         ventana.cpp \
-    mapa.cpp \
-    algoritmos.cpp
+    mapa.cpp
 
 HEADERS  += ventana.h \
-    mapa.h \
-    algoritmos.h
+    mapa.h
 
 FORMS    += ventana.ui
 
@@ -51,3 +49,5 @@ OTHER_FILES += \
     Imagenes/A-2.png \
     Imagenes/A-1.png \
     Imagenes/A.png
+
+
