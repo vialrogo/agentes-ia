@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QGraphicsLineItem>
 #include <QFileDialog>
+#include <QMessageBox>
 #include <iostream>
 #include <fstream>
 #include <mapa.h>
@@ -24,6 +25,7 @@ public:
     Mapa* mapita;
     int W;
     int H;
+    bool IsMapaCargado; //Global para saber si ya se cargó un mapa
 
 private:
     Ui::Ventana *ui;
@@ -33,6 +35,8 @@ private:
 public slots:
     void correr();
     void cargarArchivo();
+    void cargarComboBoxInfor();
+    void cargarComboBoxUninfor();
 };
 
 #endif // VENTANA_H
