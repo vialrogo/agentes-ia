@@ -56,4 +56,12 @@ OTHER_FILES += \
     Imagenes/C2.png \
     Imagenes/C1.png \
     Imagenes/A1.png \
-    Imagenes/A2.png
+    Imagenes/A2.png \
+    Documentacion/ejemplo.in \
+    Documentacion/ejemplo2.in \
+    Documentacion/ejemplo3.in \
+    Documentacion/Proyecto1-2011.pdf
+
+
+
+
