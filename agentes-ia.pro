@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     costouniforme.cpp \
     profundidadevitandociclos.cpp \
     avara.cpp \
-    aestrella.cpp
+    aestrella.cpp \
+    agente.cpp
 
 HEADERS  += ventana.h \
     mapa.h \
@@ -28,7 +29,8 @@ HEADERS  += ventana.h \
     profundidadevitandociclos.h \
     profundidadevitandociclos.h \
     avara.h \
-    aestrella.h
+    aestrella.h \
+    agente.h
 
 FORMS    += ventana.ui
 

@@ -1,7 +1,9 @@
 #ifndef AVARA_H
 #define AVARA_H
 
-class Avara
+#include "algoritmos.h"
+
+class Avara : public Algoritmos
 {
 public:
     Avara();

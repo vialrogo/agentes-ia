@@ -1,7 +1,9 @@
 #ifndef PROFUNDIDADEVITANDOCICLOS_H
 #define PROFUNDIDADEVITANDOCICLOS_H
 
-class ProfundidadEvitandoCiclos
+#include "algoritmos.h"
+
+class ProfundidadEvitandoCiclos : public Algoritmos
 {
 public:
     ProfundidadEvitandoCiclos();
