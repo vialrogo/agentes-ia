@@ -46,19 +46,21 @@ void Ventana::pintarCuadricula(int n, int m)
     for (int i = 0; i <=m; ++i)
     {
         QGraphicsLineItem *line = new QGraphicsLineItem(i*ancho,0,i*ancho,n*alto);
+        line->setPen(QColor(180,180,180,255));//Coloca el color de la cuadricula: R,G,B,alfa
         mapita->addItem(line);
     }
 
     for (int i = 0; i <= n; ++i)
     {
         QGraphicsLineItem *line = new QGraphicsLineItem(0,i*alto,m*ancho,i*alto);
+        line->setPen(QColor(180,180,180,255));//Coloca el color de la cuadricula: R,G,B,alfa
         mapita->addItem(line);
     }
 }
 
 void Ventana::cargarArchivo()
 {
-    borrarMapa();
+    pintarCuadricula(7,7);
     mapita->matriz= new int*[7];
     for (int i = 0; i < 7; ++i)
         mapita->matriz[i]=new int[7];

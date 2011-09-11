@@ -1,7 +1,9 @@
 #ifndef AESTRELLA_H
 #define AESTRELLA_H
 
-class AEstrella
+#include "algoritmos.h"
+
+class AEstrella : public Algoritmos
 {
 public:
     AEstrella();

@@ -1,7 +1,9 @@
 #ifndef COSTOUNIFORME_H
 #define COSTOUNIFORME_H
 
-class CostoUniforme
+#include "algoritmos.h"
+
+class CostoUniforme : public Algoritmos
 {
 public:
     CostoUniforme();
