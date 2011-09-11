@@ -1,3 +1,7 @@
+/*
+  Victor Alberto Romero Gonzalez
+  Erika Suárez Valencia
+*/
 #ifndef VENTANA_H
 #define VENTANA_H
 
