@@ -204,13 +204,17 @@ char** Algoritmos::mover(QPoint *posCarro, int direccion, int casillas, char** m
     return matFinal;
 }
 
-list<Nodo*>* Algoritmos::expandir(Nodo *nodito)
+//Expande el nodo de entrada, retornando una lista con sus hijos creados.
+//En caso de ser meta, la lista es null.
+//En caso de no tener hijos, la lista es vacía
+list<Nodo*>* Algoritmos::expandir(Nodo *nodito)/** FALTA PROBARLA */
 {
+    list<Nodo*> *respuesta=0;
     QPoint *puntoTmp;
-    if(esMeta(nodito->getEstado())) return new list<Nodo*>();
+    if(esMeta(nodito->getEstado())) return respuesta;
 
     else{
-        list<Nodo*> *respuesta=new list<Nodo*>();
+        respuesta=new list<Nodo*>();
 
         for (int i = 0; i < 7; ++i) {//los diferentes carros
             for (int j = 0; j < 2; ++j) {//las 2 direcciones
