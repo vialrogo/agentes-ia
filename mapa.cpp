@@ -69,6 +69,7 @@ void Mapa::crearCuadros(char** matriz, bool* direcciones)
             if(letra == '1'){
                 QGraphicsRectItem* qri =  new QGraphicsRectItem(j*anchoCelda,i*altoCelda,anchoCelda,altoCelda);                
                 qri->setBrush(QPixmap ("Imagenes/muro.jpg"));
+                qri->setPen(QColor(180,180,180,0));
                 this->addItem(qri);
             }
         }
