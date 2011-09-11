@@ -20,6 +20,8 @@ public:
     string getOperadorAplicado();
     int getProfundidad();
     int getCosto();
+
+    bool operator ==(Nodo* otroNodo);
 };
 
 #endif // NODO_H
