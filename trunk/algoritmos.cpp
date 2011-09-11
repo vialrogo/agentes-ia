@@ -4,10 +4,15 @@
 */
 #include "algoritmos.h"
 
+Algoritmos::Algoritmos()
+{
+
+}
+
 Algoritmos::Algoritmos(bool *dirIn)
 {
-    direcciones= new int[6]; //true para vertical, false para horizontal
-    for(int i=0; i<6; i++) direcciones[i]=dirIn[i];
+    direcciones= new int[7]; //true para vertical, false para horizontal
+    for(int i=0; i<7; i++) direcciones[i]=dirIn[i];
 }
 
 //Verifica si un nodo es meta.
@@ -34,7 +39,8 @@ QPoint* Algoritmos::sePuedeMover(char carro, int direccion, int casillas, char**
             }
         }
     }
-    if(direcciones[carro-66]){//Movimiento vertical
+
+    if(direcciones[carro-65]){//Movimiento vertical
         if(direccion==1){//Moverse hacia arriba
             if((x-casillas)>-1){
                 for (int var = 1; var < casillas+1; var++) {
@@ -118,7 +124,7 @@ char** Algoritmos::mover(QPoint *posCarro, int direccion, int casillas, char** m
     char tmp=matActual[x][y];
     int tmpi=0;
 
-    if(direcciones[tmp-66]){//Movimiento Vertical
+    if(direcciones[tmp-65]){//Movimiento Vertical
         if(direccion==1){//Moverse hacia arriba
             if((tmp=='A' || tmp=='B') || (tmp=='C' || tmp=='D')){//Carros de largo 2
                 for (int var = 0; var < 2; var++) {
@@ -198,79 +204,119 @@ char** Algoritmos::mover(QPoint *posCarro, int direccion, int casillas, char** m
     return matFinal;
 }
 
-void Algoritmos::imprimir(char** mat)
+list<Nodo*>* Algoritmos::expandir(Nodo *nodito)
 {
-    for (int var = 0; var < 7; ++var) {
-        for (int d = 0; d < 7; ++d) {
-            cout<<mat[var][d]<<" ";
+    QPoint *puntoTmp;
+    if(esMeta(nodito->getEstado())) return new list<Nodo*>();
+
+    else{
+        list<Nodo*> *respuesta=new list<Nodo*>();
+
+        for (int i = 0; i < 7; ++i) {//los diferentes carros
+            for (int j = 0; j < 2; ++j) {//las 2 direcciones
+                for (int k = 1; k < 8; ++k) {//las casillas
+                    char car=i+65;
+                    puntoTmp=sePuedeMover(car,j,k,nodito->getEstado());
+
+                    if(puntoTmp->x()!=-1 && puntoTmp->y()!=-1){
+                        string opTotal=nodito->getOperadorAplicado();
+                        ostringstream opApp;
+                        opApp<<car;
+                        opApp<<j;
+                        opApp<<k;
+                        opTotal+=opApp.str();
+
+                        respuesta->push_back(new Nodo(mover(puntoTmp,j,k,nodito->getEstado()),
+                                                      nodito,opTotal,nodito->getProfundidad()+1,
+                                                      nodito->getCosto()+k));
+                    }
+                }
+            }
         }
-        cout<<endl;
+        return respuesta;
     }
 }
 
-int main(){
-    Algoritmos *ensayo;
+//void Algoritmos::imprimir(char** mat)
+//{
+//    for (int var = 0; var < 7; ++var) {
+//        for (int d = 0; d < 7; ++d) {
+//            cout<<mat[var][d]<<" ";
+//        }
+//        cout<<endl;
+//    }
+//}
 
-    char** prueba=new char*[7];
-    char** resPrueba=new char*[7];
-    for (int var = 0; var < 7; var++) {
-        prueba[var]=new char[7];
-        resPrueba[var]=new char[7];
-    }
-    prueba[0][0]='0';prueba[0][1]='E';prueba[0][2]='E';prueba[0][3]='E';prueba[0][4]='0';prueba[0][5]='0';prueba[0][6]='1';
-    prueba[1][0]='0';prueba[1][1]='0';prueba[1][2]='0';prueba[1][3]='0';prueba[1][4]='0';prueba[1][5]='0';prueba[1][6]='0';
-    prueba[2][0]='A';prueba[2][1]='A';prueba[2][2]='C';prueba[2][3]='0';prueba[2][4]='0';prueba[2][5]='0';prueba[2][6]='D';
-    prueba[3][0]='0';prueba[3][1]='0';prueba[3][2]='C';prueba[3][3]='0';prueba[3][4]='0';prueba[3][5]='0';prueba[3][6]='D';
-    prueba[4][0]='F';prueba[4][1]='0';prueba[4][2]='G';prueba[4][3]='G';prueba[4][4]='G';prueba[4][5]='B';prueba[4][6]='0';
-    prueba[5][0]='F';prueba[5][1]='0';prueba[5][2]='0';prueba[5][3]='0';prueba[5][4]='0';prueba[5][5]='B';prueba[5][6]='0';
-    prueba[6][0]='F';prueba[6][1]='0';prueba[6][2]='0';prueba[6][3]='1';prueba[6][4]='0';prueba[6][5]='0';prueba[6][6]='0';
+//int main(){
+//    Algoritmos *ensayo;
 
-    bool *pruebaDir=new bool[6];
-    pruebaDir[0]=true;
-    pruebaDir[1]=true;
-    pruebaDir[2]=true;
-    pruebaDir[3]=false;
-    pruebaDir[4]=true;
-    pruebaDir[5]=false;
+//    char** prueba=new char*[7];
+//    char** resPrueba=new char*[7];
+//    for (int var = 0; var < 7; var++) {
+//        prueba[var]=new char[7];
+//        resPrueba[var]=new char[7];
+//    }
+//    prueba[0][0]='0';prueba[0][1]='E';prueba[0][2]='E';prueba[0][3]='E';prueba[0][4]='0';prueba[0][5]='0';prueba[0][6]='1';
+//    prueba[1][0]='0';prueba[1][1]='0';prueba[1][2]='0';prueba[1][3]='0';prueba[1][4]='0';prueba[1][5]='0';prueba[1][6]='0';
+//    prueba[2][0]='A';prueba[2][1]='A';prueba[2][2]='C';prueba[2][3]='0';prueba[2][4]='0';prueba[2][5]='0';prueba[2][6]='D';
+//    prueba[3][0]='0';prueba[3][1]='0';prueba[3][2]='C';prueba[3][3]='0';prueba[3][4]='0';prueba[3][5]='0';prueba[3][6]='D';
+//    prueba[4][0]='F';prueba[4][1]='0';prueba[4][2]='G';prueba[4][3]='G';prueba[4][4]='G';prueba[4][5]='B';prueba[4][6]='0';
+//    prueba[5][0]='F';prueba[5][1]='0';prueba[5][2]='0';prueba[5][3]='0';prueba[5][4]='0';prueba[5][5]='B';prueba[5][6]='0';
+//    prueba[6][0]='F';prueba[6][1]='0';prueba[6][2]='0';prueba[6][3]='1';prueba[6][4]='0';prueba[6][5]='0';prueba[6][6]='0';
 
-    ensayo=new Algoritmos(pruebaDir);
-    QPoint* punto;
+//    bool *pruebaDir=new bool[6];
+//    pruebaDir[0]=false;
+//    pruebaDir[1]=true;
+//    pruebaDir[2]=true;
+//    pruebaDir[3]=true;
+//    pruebaDir[4]=false;
+//    pruebaDir[5]=true;
+//    pruebaDir[6]=false;
+////    pruebaDir[0]=true;
+////    pruebaDir[1]=true;
+////    pruebaDir[2]=true;
+////    pruebaDir[3]=false;
+////    pruebaDir[4]=true;
+////    pruebaDir[5]=false;
+
+//    ensayo=new Algoritmos(pruebaDir);
+//    QPoint* punto;
 //    punto=ensayo->sePuedeMover('A',1,1,prueba);
 //    cout<<"A, derecha, 1: "<<punto->x()<<" "<<punto->y()<<endl;
 //    punto=ensayo->sePuedeMover('A',0,1,prueba);
 //    cout<<"A, izquierda 1: "<<punto->x()<<" "<<punto->y()<<endl;
-    ensayo->imprimir(prueba);
-    punto=ensayo->sePuedeMover('D',0,3,prueba);
-    cout<<"D, abajo 3: "<<punto->x()<<" "<<punto->y()<<endl;
-    resPrueba=ensayo->mover(punto,0,3,prueba);
-    ensayo->imprimir(resPrueba);
+//    ensayo->imprimir(prueba);
+//    punto=ensayo->sePuedeMover('D',0,3,prueba);
+//    cout<<"D, abajo 3: "<<punto->x()<<" "<<punto->y()<<endl;
+//    resPrueba=ensayo->mover(punto,0,3,prueba);
+//    ensayo->imprimir(resPrueba);
 
-    cout<<endl;
+//    cout<<endl;
 
-    ensayo->imprimir(prueba);
-    punto=ensayo->sePuedeMover('D',1,1,prueba);
-    cout<<"D, arriba 1: "<<punto->x()<<" "<<punto->y()<<endl;
-    resPrueba=ensayo->mover(punto,1,1,prueba);
-    ensayo->imprimir(resPrueba);
+//    ensayo->imprimir(prueba);
+//    punto=ensayo->sePuedeMover('D',1,1,prueba);
+//    cout<<"D, arriba 1: "<<punto->x()<<" "<<punto->y()<<endl;
+//    resPrueba=ensayo->mover(punto,1,1,prueba);
+//    ensayo->imprimir(resPrueba);
 
-    cout<<endl;
+//    cout<<endl;
 
-    ensayo->imprimir(prueba);
-    punto=ensayo->sePuedeMover('E',0,1,prueba);
-    cout<<"E, izquierda 1: "<<punto->x()<<" "<<punto->y()<<endl;
-    resPrueba=ensayo->mover(punto,0,1,prueba);
-    ensayo->imprimir(resPrueba);
+//    ensayo->imprimir(prueba);
+//    punto=ensayo->sePuedeMover('E',0,1,prueba);
+//    cout<<"E, izquierda 1: "<<punto->x()<<" "<<punto->y()<<endl;
+//    resPrueba=ensayo->mover(punto,0,1,prueba);
+//    ensayo->imprimir(resPrueba);
 
-    cout<<endl;
+//    cout<<endl;
 
-    ensayo->imprimir(prueba);
-    punto=ensayo->sePuedeMover('E',1,1,prueba);
-    cout<<"E, derecha 1: "<<punto->x()<<" "<<punto->y()<<endl;
-    resPrueba=ensayo->mover(punto,1,1,prueba);
-    ensayo->imprimir(resPrueba);
+//    ensayo->imprimir(prueba);
+//    punto=ensayo->sePuedeMover('E',1,1,prueba);
+//    cout<<"E, derecha 1: "<<punto->x()<<" "<<punto->y()<<endl;
+//    resPrueba=ensayo->mover(punto,1,1,prueba);
+//    ensayo->imprimir(resPrueba);
 
 //    punto=ensayo->sePuedeMover('C',0,1,prueba);
 //    cout<<"C, abajo 1: "<<punto->x()<<" "<<punto->y()<<endl;
 //    punto=ensayo->sePuedeMover('C',1,2,prueba);
 //    cout<<"C, arriba 2: "<<punto->x()<<" "<<punto->y()<<endl;
-}
+//}

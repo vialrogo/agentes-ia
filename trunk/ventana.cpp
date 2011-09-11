@@ -1,3 +1,7 @@
+/*
+  Victor Alberto Romero Gonzalez
+  Erika Suárez Valencia
+*/
 #include "ventana.h"
 #include "ui_ventana.h"
 
@@ -19,6 +23,11 @@ Ventana::Ventana(QWidget *parent) :
     nombreProjecto="Project agentes-ia";
 
     this->setWindowTitle(nombreProjecto);
+
+    ui->botonRun->setEnabled(false);
+    ui->radioButtonInformed->setEnabled(false);
+    ui->radioButtonUninformed->setEnabled(false);
+    ui->comboBoxAlgoritmos->setEnabled(false);
 
     connect(ui->actionQuit, SIGNAL(triggered()),this,SLOT(close()));
     connect(ui->botonRun,SIGNAL(clicked()),this,SLOT(correr()));
@@ -89,26 +98,51 @@ void Ventana::cargarArchivo()
         }
     }
     mapita->crearCuadros(matriz,direcciones);
+
     IsMapaCargado=true;
+    ui->radioButtonInformed->setEnabled(true);
+    ui->radioButtonUninformed->setEnabled(true);
+    ui->botonRun->setEnabled(false);
+
+    while(ui->comboBoxAlgoritmos->count()>0)
+        ui->comboBoxAlgoritmos->removeItem(0);
+    ui->comboBoxAlgoritmos->addItem("Select type of algorithm");
+    ui->comboBoxAlgoritmos->setEnabled(false);
+
+    ui->radioButtonInformed->setAutoExclusive(false);
+    ui->radioButtonUninformed->setAutoExclusive(false);
+    ui->radioButtonInformed->setChecked(false);
+    ui->radioButtonUninformed->setChecked(false);
+    ui->radioButtonInformed->setAutoExclusive(true);
+    ui->radioButtonUninformed->setAutoExclusive(true);
 }
 
 void Ventana::cargarComboBoxInfor()
 {
-    while(ui->comboBoxAlgoritmos->count()>0)
-        ui->comboBoxAlgoritmos->removeItem(0);
+    if(IsMapaCargado){
+        while(ui->comboBoxAlgoritmos->count()>0)
+            ui->comboBoxAlgoritmos->removeItem(0);
+        ui->comboBoxAlgoritmos->addItem("Greedy algorithm");
+        ui->comboBoxAlgoritmos->addItem("A*");
 
-    ui->comboBoxAlgoritmos->addItem("Avara");
-    ui->comboBoxAlgoritmos->addItem("A*");
+        ui->comboBoxAlgoritmos->setEnabled(true);
+        ui->botonRun->setEnabled(true);
+    }
 }
 
 void Ventana::cargarComboBoxUninfor()
 {
-    while(ui->comboBoxAlgoritmos->count()>0)
-        ui->comboBoxAlgoritmos->removeItem(0);
+    if(IsMapaCargado){
+        while(ui->comboBoxAlgoritmos->count()>0)
+            ui->comboBoxAlgoritmos->removeItem(0);
 
-    ui->comboBoxAlgoritmos->addItem("Preferente por amplitud");
-    ui->comboBoxAlgoritmos->addItem("Costo uniforme");
-    ui->comboBoxAlgoritmos->addItem("Preferente por profundidad evitando ciclos");
+        ui->comboBoxAlgoritmos->addItem("Breadth-first search");
+        ui->comboBoxAlgoritmos->addItem("Uniform-cost search");
+        ui->comboBoxAlgoritmos->addItem("Depth-first search (avoiding cycles)");
+
+        ui->comboBoxAlgoritmos->setEnabled(true);
+        ui->botonRun->setEnabled(true);
+    }
 }
 
 void Ventana::acercaDe()
@@ -117,7 +151,7 @@ void Ventana::acercaDe()
     msgBox.setTextFormat(Qt::RichText);
     msgBox.setWindowTitle("About");
     msgBox.setText("<h3>"+nombreProjecto+"</h3>");
-    msgBox.setInformativeText("Create by: \n    Erika Suarez Valencia\n    Victor Alberto Romero");
+    msgBox.setInformativeText("Create by: \n    Victor Alberto Romero\n    Erika Suarez Valencia");
     msgBox.setIcon(QMessageBox::Information);
     msgBox.exec();
     return;
@@ -126,26 +160,6 @@ void Ventana::acercaDe()
 void Ventana::correr()
 {
     QString Algoritmo = ui->comboBoxAlgoritmos->currentText();
-
-    if(!IsMapaCargado) //Traducir!!
-    {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle("Seleccione una entrada");
-        msgBox.setText("Debe primero selecionar un archivo de entrada.");
-        msgBox.setIcon(QMessageBox::Warning);
-        msgBox.exec();
-        return;
-    }
-
-    if(Algoritmo=="Select type of algorithm") //Traducir!!
-    {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle("Seleccione un algoritmo");
-        msgBox.setText("Por favor seleccione algún algoritmo de búsqueda.");
-        msgBox.setIcon(QMessageBox::Information);
-        msgBox.exec();
-        return;
-    }
 
     if(Algoritmo=="Preferente por amplitud")
     {
