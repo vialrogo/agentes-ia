@@ -59,6 +59,5 @@ OTHER_FILES += \
     Imagenes/B-1-hz.jpg \
     Imagenes/B.png \
     Imagenes/B.jpg \
-    Imagenes/A-2.png \
     Imagenes/A-1.png \
     Imagenes/A.png
