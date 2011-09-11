@@ -35,31 +35,25 @@ HEADERS  += ventana.h \
 FORMS    += ventana.ui
 
 OTHER_FILES += \
-    Imagenes/tmpE.PNG \
-    Imagenes/tmpB.png \
-    Imagenes/tmpA.png \
-    Imagenes/muro_2.jpg \
-    Imagenes/muro_1.jpg \
-    Imagenes/EFG-3-vl.jpg \
-    Imagenes/EFG-3-hz.jpg \
-    Imagenes/EFG-2-vl.jpg \
-    Imagenes/EFG-2-hz.jpg \
-    Imagenes/EFG-1-vl.jpg \
-    Imagenes/EFG-1-hz.jpg \
     Imagenes/EFG.jpg \
-    Imagenes/D.PNG \
-    Imagenes/CD-2-vl.jpg \
-    Imagenes/CD-2-hz.jpg \
-    Imagenes/CD-1-vl.jpg \
-    Imagenes/CD-1-hz.jpg \
     Imagenes/CD.jpg \
     Imagenes/carros.jpg \
-    Imagenes/B-2-vl.jpg \
-    Imagenes/B-2-hz.jpg \
-    Imagenes/B-1-vl.png \
-    Imagenes/B-1-vl.jpg \
-    Imagenes/B-1-hz.jpg \
-    Imagenes/B.png \
+    Imagenes/A.png \
+    Imagenes/OriginalMuro.jpg \
+    Imagenes/muro.jpg \
     Imagenes/B.jpg \
-    Imagenes/A-1.png \
-    Imagenes/A.png
+    Imagenes/OriginalA.png \
+    Imagenes/B2.png \
+    Imagenes/B1.png \
+    Imagenes/G2.png \
+    Imagenes/G1.png \
+    Imagenes/F2.png \
+    Imagenes/F1.png \
+    Imagenes/E2.png \
+    Imagenes/E1.png \
+    Imagenes/D2.png \
+    Imagenes/D1.png \
+    Imagenes/C2.png \
+    Imagenes/C1.png \
+    Imagenes/A1.png \
+    Imagenes/A2.png
