@@ -36,6 +36,26 @@ void Ventana::borrarMapa()
     mapita->clear();
 }
 
+void Ventana::pintarCuadricula(int n, int m)
+{
+    borrarMapa();
+
+    int ancho = W/m;
+    int alto = H/n;
+
+    for (int i = 0; i <=m; ++i)
+    {
+        QGraphicsLineItem *line = new QGraphicsLineItem(i*ancho,0,i*ancho,n*alto);
+        mapita->addItem(line);
+    }
+
+    for (int i = 0; i <= n; ++i)
+    {
+        QGraphicsLineItem *line = new QGraphicsLineItem(0,i*alto,m*ancho,i*alto);
+        mapita->addItem(line);
+    }
+}
+
 void Ventana::cargarArchivo()
 {
     borrarMapa();

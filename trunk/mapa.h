@@ -18,7 +18,6 @@ public:
     int m;
 
     Mapa(int ancho, int alto);
-    void ponerQuitarCuadro(int xCelda, int yCelda);
     void crearCuadros();
 
 private:
