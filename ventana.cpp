@@ -6,10 +6,12 @@ Ventana::Ventana(QWidget *parent) :
     ui(new Ui::Ventana)
 {
     ui->setupUi(this);
-
+    N = 7;
+    M = 7;
+    cantidadCarros = 6;
     W=455; //476 - 68
     H=455; //434 - 62
-    mapita = new Mapa(W,H);
+    mapita = new Mapa(W,H,N,M,cantidadCarros+1);
     mapita->setSceneRect(0,0,W,H);
     ui->graphicsView->setScene(mapita);
 
@@ -60,62 +62,33 @@ void Ventana::pintarCuadricula(int n, int m)
 
 void Ventana::cargarArchivo()
 {
-    pintarCuadricula(7,7);
-    mapita->matriz= new int*[7];
-    for (int i = 0; i < 7; ++i)
-        mapita->matriz[i]=new int[7];
-    mapita->m=7;
-    mapita->n=7;
-
+    pintarCuadricula(N,M);
     QString rutaArchivo = QFileDialog::getOpenFileName();
     ifstream infile(qPrintable(rutaArchivo));
 
-    char caracter;
-    for(int j=0; j<7; j++)
-    {
-        for(int i=0; i<7; i++)
-        {
-            infile >> caracter;
-            if(caracter=='A') mapita->matriz[j][i]=-1; //-1 vertical, -2 horizontal
-            else if(caracter=='B') mapita->matriz[j][i]=-3; //-3 vertical, -4 horizontal
-            else if(caracter=='C') mapita->matriz[j][i]=-5; //-5 vertical, -6 horizontal
-            else if(caracter=='D') mapita->matriz[j][i]=-7; //-7 vertical, -8 horizontal
-            else if(caracter=='E') mapita->matriz[j][i]=-9; //-9 vertical, -10 horizontal
-            else if(caracter=='F') mapita->matriz[j][i]=-11; //-11 vertical, -12 horizontal
-            else if(caracter=='G') mapita->matriz[j][i]=-13; //-13 vertical, -14 horizontal
-            else if(caracter=='0') mapita->matriz[j][i]=0;
-            else if(caracter=='1') mapita->matriz[j][i]=1;
+    matriz= new char*[N];
+    for (int i = 0; i < N; ++i)
+        matriz[i]=new char[M];
+
+    direcciones= new bool[cantidadCarros];
+    for (int i = 0; i < cantidadCarros; ++i)
+        direcciones[i]=true;
+
+    for(int i=0; i<N; i++){
+        for(int j=0; j<M; j++){
+               infile >> matriz[i][j];
         }
     }
-
-    int tmp=2, x=0, y=0;
-    for(int j=0; j<7; j++)
-    {
-        for(int i=0; i<7; i++)
-        {
-            if(mapita->matriz[j][i]==tmp && tmp!=0 && tmp!=1){
-                tmp=mapita->matriz[j][i];
-                mapita->matriz[j][i]--;
-                if(mapita->matriz[x][y]%2!=0) mapita->matriz[x][y]--;
-                x=j;
-                y=i;
+    char tmp=' ';
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < M; ++j) {
+            if(tmp == matriz[i][j] && tmp != '0' && tmp!='1' && tmp!='A'){
+                direcciones[tmp-66]=false;
             }
-            else{
-                tmp=mapita->matriz[j][i];
-                x=j;
-                y=i;
-            }
+            tmp = matriz[i][j];
         }
     }
-
-//    for(int j=0; j<7; j++)
-//    {
-//        for(int i=0; i<7; i++)
-//            cout<<mapita->matriz[j][i]<<" ";
-//        cout<<endl;
-//    }
-
-    mapita->crearCuadros();
+    mapita->crearCuadros(matriz,direcciones);
     IsMapaCargado=true;
 }
 

@@ -1,6 +1,7 @@
 #include <QtGui/QApplication>
 #include <QTextCodec>
 #include "ventana.h"
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {

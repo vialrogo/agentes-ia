@@ -25,6 +25,9 @@ public:
     Mapa* mapita;
     int W;
     int H;
+    int N;
+    int M;
+    int cantidadCarros;
     bool IsMapaCargado; //Global para saber si ya se cargó un mapa
     QString nombreProjecto; //Es variable para que aparezca igual en about
 
@@ -32,7 +35,8 @@ private:
     Ui::Ventana *ui;
     void borrarMapa();
     void pintarCuadricula(int n, int m);
-
+    char** matriz;
+    bool* direcciones;
 public slots:
     void correr();
     void cargarArchivo();
