@@ -13,24 +13,6 @@ Mapa::Mapa(int ancho, int alto)
         matriz[i]=new int[m];
 }
 
-void Mapa::ponerQuitarCuadro(int xCelda, int yCelda)
-{
-
-    if(xCelda<n && yCelda<m)
-    {
-        if(this->items().contains(cuadros[xCelda][yCelda]))
-        {
-            matriz[xCelda][yCelda]=0;
-            this->removeItem(cuadros[xCelda][yCelda]);
-        }
-        else
-        {
-            matriz[xCelda][yCelda]=1;
-            this->addItem(cuadros[xCelda][yCelda]);
-        }
-    }
-}
-
 void Mapa::crearCuadros()
 {
     int anchoCelda = (W/m);
@@ -49,7 +31,7 @@ void Mapa::crearCuadros()
         for (int j = 0; j < m; ++j)
         {
             cuadros[i][j]= new QGraphicsRectItem(j*anchoCelda,i*altoCelda,anchoCelda,altoCelda,0,0);
-            cuadros[i][j]->setPen(QColor(180,180,180,255));//Coloca el color de la cuadricula: R,G,B,alfa
+            cuadros[i][j]->setPen(QColor(180,180,180,0));//Coloca el color de la cuadricula: R,G,B,alfa
 
 //Aqui quedé, falta agregar banderas y terminar el switch para pintar el mapa.
             switch(matriz[i][j])
