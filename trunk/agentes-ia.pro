@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     profundidadevitandociclos.cpp \
     avara.cpp \
     aestrella.cpp \
-    agente.cpp
+    agente.cpp \
+    nodo.cpp
 
 HEADERS  += ventana.h \
     mapa.h \
@@ -30,7 +31,8 @@ HEADERS  += ventana.h \
     profundidadevitandociclos.h \
     avara.h \
     aestrella.h \
-    agente.h
+    agente.h \
+    nodo.h
 
 FORMS    += ventana.ui
 
