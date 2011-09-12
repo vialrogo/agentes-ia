@@ -207,8 +207,9 @@ char** Algoritmos::mover(QPoint *posCarro, int direccion, int casillas, char** m
 //Expande el nodo de entrada, retornando una lista con sus hijos creados.
 //En caso de ser meta, la lista es null.
 //En caso de no tener hijos, la lista es vacía
-list<Nodo*>* Algoritmos::expandir(Nodo *nodito)/** FALTA PROBARLA */
+list<Nodo*>* Algoritmos::expandir(Nodo *nodito)
 {
+    cout<<"expandir"<<endl;
     list<Nodo*> *respuesta=0;
     QPoint *puntoTmp;
     if(esMeta(nodito->getEstado())) return respuesta;
@@ -219,8 +220,8 @@ list<Nodo*>* Algoritmos::expandir(Nodo *nodito)/** FALTA PROBARLA */
         for (int i = 0; i < 7; ++i) {//los diferentes carros
             for (int j = 0; j < 2; ++j) {//las 2 direcciones
                 for (int k = 1; k < 8; ++k) {//las casillas
+                    cout<<"i,j,k"<<i<<j<<k<<endl;
                     char car=i+65;
-                    puntoTmp=sePuedeMover(car,j,k,nodito->getEstado());
 
                     if(puntoTmp->x()!=-1 && puntoTmp->y()!=-1){
                         string opTotal=nodito->getOperadorAplicado();
@@ -260,13 +261,13 @@ list<Nodo*>* Algoritmos::expandir(Nodo *nodito)/** FALTA PROBARLA */
 //        prueba[var]=new char[7];
 //        resPrueba[var]=new char[7];
 //    }
-//    prueba[0][0]='0';prueba[0][1]='E';prueba[0][2]='E';prueba[0][3]='E';prueba[0][4]='0';prueba[0][5]='0';prueba[0][6]='1';
-//    prueba[1][0]='0';prueba[1][1]='0';prueba[1][2]='0';prueba[1][3]='0';prueba[1][4]='0';prueba[1][5]='0';prueba[1][6]='0';
+//    prueba[0][0]='E';prueba[0][1]='E';prueba[0][2]='E';prueba[0][3]='0';prueba[0][4]='1';prueba[0][5]='1';prueba[0][6]='1';
+//    prueba[1][0]='0';prueba[1][1]='0';prueba[1][2]='0';prueba[1][3]='0';prueba[1][4]='0';prueba[1][5]='1';prueba[1][6]='0';
 //    prueba[2][0]='A';prueba[2][1]='A';prueba[2][2]='C';prueba[2][3]='0';prueba[2][4]='0';prueba[2][5]='0';prueba[2][6]='D';
-//    prueba[3][0]='0';prueba[3][1]='0';prueba[3][2]='C';prueba[3][3]='0';prueba[3][4]='0';prueba[3][5]='0';prueba[3][6]='D';
-//    prueba[4][0]='F';prueba[4][1]='0';prueba[4][2]='G';prueba[4][3]='G';prueba[4][4]='G';prueba[4][5]='B';prueba[4][6]='0';
-//    prueba[5][0]='F';prueba[5][1]='0';prueba[5][2]='0';prueba[5][3]='0';prueba[5][4]='0';prueba[5][5]='B';prueba[5][6]='0';
-//    prueba[6][0]='F';prueba[6][1]='0';prueba[6][2]='0';prueba[6][3]='1';prueba[6][4]='0';prueba[6][5]='0';prueba[6][6]='0';
+//    prueba[3][0]='1';prueba[3][1]='0';prueba[3][2]='C';prueba[3][3]='0';prueba[3][4]='0';prueba[3][5]='0';prueba[3][6]='D';
+//    prueba[4][0]='F';prueba[4][1]='1';prueba[4][2]='G';prueba[4][3]='G';prueba[4][4]='G';prueba[4][5]='B';prueba[4][6]='1';
+//    prueba[5][0]='F';prueba[5][1]='0';prueba[5][2]='0';prueba[5][3]='0';prueba[5][4]='0';prueba[5][5]='B';prueba[5][6]='1';
+//    prueba[6][0]='F';prueba[6][1]='0';prueba[6][2]='0';prueba[6][3]='1';prueba[6][4]='0';prueba[6][5]='1';prueba[6][6]='1';
 
 //    bool *pruebaDir=new bool[6];
 //    pruebaDir[0]=false;
@@ -276,51 +277,13 @@ list<Nodo*>* Algoritmos::expandir(Nodo *nodito)/** FALTA PROBARLA */
 //    pruebaDir[4]=false;
 //    pruebaDir[5]=true;
 //    pruebaDir[6]=false;
-////    pruebaDir[0]=true;
-////    pruebaDir[1]=true;
-////    pruebaDir[2]=true;
-////    pruebaDir[3]=false;
-////    pruebaDir[4]=true;
-////    pruebaDir[5]=false;
 
+//    Nodo *inicio= new Nodo(prueba, 0, "", 0, 0);
 //    ensayo=new Algoritmos(pruebaDir);
-//    QPoint* punto;
-//    punto=ensayo->sePuedeMover('A',1,1,prueba);
-//    cout<<"A, derecha, 1: "<<punto->x()<<" "<<punto->y()<<endl;
-//    punto=ensayo->sePuedeMover('A',0,1,prueba);
-//    cout<<"A, izquierda 1: "<<punto->x()<<" "<<punto->y()<<endl;
-//    ensayo->imprimir(prueba);
-//    punto=ensayo->sePuedeMover('D',0,3,prueba);
-//    cout<<"D, abajo 3: "<<punto->x()<<" "<<punto->y()<<endl;
-//    resPrueba=ensayo->mover(punto,0,3,prueba);
-//    ensayo->imprimir(resPrueba);
-
-//    cout<<endl;
-
-//    ensayo->imprimir(prueba);
-//    punto=ensayo->sePuedeMover('D',1,1,prueba);
-//    cout<<"D, arriba 1: "<<punto->x()<<" "<<punto->y()<<endl;
-//    resPrueba=ensayo->mover(punto,1,1,prueba);
-//    ensayo->imprimir(resPrueba);
-
-//    cout<<endl;
-
-//    ensayo->imprimir(prueba);
-//    punto=ensayo->sePuedeMover('E',0,1,prueba);
-//    cout<<"E, izquierda 1: "<<punto->x()<<" "<<punto->y()<<endl;
-//    resPrueba=ensayo->mover(punto,0,1,prueba);
-//    ensayo->imprimir(resPrueba);
-
-//    cout<<endl;
-
-//    ensayo->imprimir(prueba);
-//    punto=ensayo->sePuedeMover('E',1,1,prueba);
-//    cout<<"E, derecha 1: "<<punto->x()<<" "<<punto->y()<<endl;
-//    resPrueba=ensayo->mover(punto,1,1,prueba);
-//    ensayo->imprimir(resPrueba);
-
-//    punto=ensayo->sePuedeMover('C',0,1,prueba);
-//    cout<<"C, abajo 1: "<<punto->x()<<" "<<punto->y()<<endl;
-//    punto=ensayo->sePuedeMover('C',1,2,prueba);
-//    cout<<"C, arriba 2: "<<punto->x()<<" "<<punto->y()<<endl;
+//    list<Nodo*>* miLista=ensayo->expandir(inicio);
+//    while(!miLista->empty()){
+//        ensayo->imprimir(miLista->front()->getEstado());
+//        miLista->pop_front();
+//        cout<<endl;
+//    }
 //}

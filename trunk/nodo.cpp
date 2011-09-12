@@ -14,7 +14,7 @@ bool Nodo::operator ==(Nodo* otroNodo)
 {
     for (int i = 0; i < 7; ++i) {
         for (int j = 0; j < 7; ++j) {
-            if(padre->getEstado()[i][j]!=otroNodo->getEstado()[i][j]) return false;
+            if(estado[i][j]!=otroNodo->getEstado()[i][j]) return false;
         }
     }
     return true;
