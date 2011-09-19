@@ -5,6 +5,8 @@
 
 class CostoUniforme : public Algoritmos
 {
+private:
+    bool *direcciones;
 public:
     CostoUniforme(bool *dirIn);
     string buscarSolucion(Nodo* estadoInicial);
