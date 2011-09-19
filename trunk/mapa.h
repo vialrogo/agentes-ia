@@ -16,6 +16,7 @@ class Mapa: public QGraphicsScene
 public:
     Mapa(int ancho, int alto,int n,int m,int c);
     void crearCuadros(char** matriz, bool* direcciones);
+    void moverCarro(char carro, int direccion, int casillas, bool* direcciones);
 
 private:
     int W;
@@ -23,6 +24,6 @@ private:
     int N;
     int M;
     int CantidadCarros;
-    QGraphicsPixmapItem** cuadros;
+    QGraphicsPixmapItem** carros;
 };
 #endif // MAPA_H
