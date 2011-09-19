@@ -17,13 +17,13 @@ using namespace std;
 class Algoritmos
 {
 private:
-    int *direcciones;
-public:
-    Algoritmos();
-    Algoritmos(bool *dirIn);
+    bool *direcciones;
     bool esMeta(char** estado);
     QPoint* sePuedeMover(char carro, int direccion, int casillas, char** matActual);
     char** mover(QPoint *posCarro, int direccion, int casillas, char** matActual);
+public:
+    Algoritmos();
+    Algoritmos(bool *dirIn);
     list<Nodo*>* expandir(Nodo *nodito);
 //    void imprimir(char** mat);
 };

@@ -11,7 +11,7 @@ Algoritmos::Algoritmos()
 
 Algoritmos::Algoritmos(bool *dirIn)
 {
-    direcciones= new int[7]; //true para vertical, false para horizontal
+    direcciones= new bool[7]; //true para vertical, false para horizontal
     for(int i=0; i<7; i++) direcciones[i]=dirIn[i];
 }
 
@@ -209,7 +209,7 @@ char** Algoritmos::mover(QPoint *posCarro, int direccion, int casillas, char** m
 //En caso de no tener hijos, la lista es vacía
 list<Nodo*>* Algoritmos::expandir(Nodo *nodito)
 {
-    cout<<"expandir"<<endl;
+//    cout<<"expandir"<<endl;
     list<Nodo*> *respuesta=0;
     QPoint *puntoTmp;
     if(esMeta(nodito->getEstado())) return respuesta;
@@ -220,8 +220,9 @@ list<Nodo*>* Algoritmos::expandir(Nodo *nodito)
         for (int i = 0; i < 7; ++i) {//los diferentes carros
             for (int j = 0; j < 2; ++j) {//las 2 direcciones
                 for (int k = 1; k < 8; ++k) {//las casillas
-                    cout<<"i,j,k"<<i<<j<<k<<endl;
+//                    cout<<"i,j,k"<<i<<j<<k<<endl;
                     char car=i+65;
+                    puntoTmp=sePuedeMover(car,j,k,nodito->getEstado());
 
                     if(puntoTmp->x()!=-1 && puntoTmp->y()!=-1){
                         string opTotal=nodito->getOperadorAplicado();

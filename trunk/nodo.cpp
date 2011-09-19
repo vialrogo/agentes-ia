@@ -44,3 +44,14 @@ int Nodo::getCosto()
 {
     return costo;
 }
+
+void Nodo::imprimir()
+{
+    for (int var = 0; var < 7; var++) {
+        for (int var2 = 0; var2 < 7; var2++) {
+            cout << estado[var][var2];
+        }
+        cout << endl;
+    }
+    cout << endl;
+}

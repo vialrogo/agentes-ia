@@ -2,6 +2,7 @@
 #define NODO_H
 
 #include <string>
+#include <iostream>
 using namespace std;
 
 class Nodo
@@ -20,6 +21,8 @@ public:
     string getOperadorAplicado();
     int getProfundidad();
     int getCosto();
+
+    void imprimir();
 
     bool operator ==(Nodo* otroNodo);
 };
