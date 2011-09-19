@@ -21,6 +21,7 @@ Ventana::Ventana(QWidget *parent) :
 
     IsMapaCargado=false;
     nombreProjecto="Project agentes-ia";
+    miAgente=new Agente();
 
     this->setWindowTitle(nombreProjecto);
 
@@ -115,6 +116,7 @@ void Ventana::cargarArchivo()
     ui->radioButtonUninformed->setChecked(false);
     ui->radioButtonInformed->setAutoExclusive(true);
     ui->radioButtonUninformed->setAutoExclusive(true);
+    miAgente->setDireciones(direcciones);
 }
 
 void Ventana::cargarComboBoxInfor()
@@ -160,10 +162,12 @@ void Ventana::acercaDe()
 void Ventana::correr()
 {
     QString Algoritmo = ui->comboBoxAlgoritmos->currentText();
+    string paraMover="";
 
     if(Algoritmo=="Breadth-first search")
     {
-        cout<<"Preferente por amplitud"<<endl;
+        paraMover= miAgente->BuscarAmplitud(matriz);
+        cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
         return;
     }
 
