@@ -6,7 +6,8 @@
 class CostoUniforme : public Algoritmos
 {
 public:
-    CostoUniforme();
+    CostoUniforme(bool *dirIn);
+    string buscarSolucion(Nodo* estadoInicial);
 };
 
 #endif // COSTOUNIFORME_H
