@@ -25,7 +25,7 @@ void Agente::setDireciones(bool *dirIn)
     for (int var = 0; var < 7; var++) direcciones[var]=dirIn[var];
 
     ptrAmplitud = new Amplitud(dirIn);
-//    ptrCostoUniforme = new CostoUniforme(dirIn);
+    ptrCostoUniforme = new CostoUniforme(dirIn);
 //    ptrProfundidadEvitandoCiclos = new ProfundidadEvitandoCiclos(dirIn);
 //    ptrAvara = new Avara(dirIn);
 //    ptrAEstrella = new AEstrella(dirIn);
