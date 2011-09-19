@@ -11,7 +11,8 @@
 #include <QMessageBox>
 #include <iostream>
 #include <fstream>
-#include <mapa.h>
+#include "mapa.h"
+#include "agente.h"
 
 using namespace std;
 
@@ -41,6 +42,7 @@ private:
     void pintarCuadricula(int n, int m);
     char** matriz;
     bool* direcciones;
+    Agente *miAgente;
 public slots:
     void correr();
     void cargarArchivo();
