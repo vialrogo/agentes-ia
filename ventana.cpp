@@ -12,9 +12,9 @@ Ventana::Ventana(QWidget *parent) :
     ui->setupUi(this);
     N = 7;
     M = 7;
-    cantidadCarros = 6;
-    W=455; //476 - 68
-    H=455; //434 - 62
+    cantidadCarros = 7;
+    W=455; //65
+    H=455; //65
     mapita = new Mapa(W,H,N,M,cantidadCarros+1);
     mapita->setSceneRect(0,0,W,H);
     ui->graphicsView->setScene(mapita);
@@ -91,8 +91,8 @@ void Ventana::cargarArchivo()
     char tmp=' ';
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < M; ++j) {
-            if(tmp == matriz[i][j] && tmp != '0' && tmp!='1' && tmp!='A'){
-                direcciones[tmp-66]=false;
+            if(tmp == matriz[i][j] && tmp != '0' && tmp!='1'){
+                direcciones[tmp-65]=false;
             }
             tmp = matriz[i][j];
         }
@@ -161,25 +161,25 @@ void Ventana::correr()
 {
     QString Algoritmo = ui->comboBoxAlgoritmos->currentText();
 
-    if(Algoritmo=="Preferente por amplitud")
+    if(Algoritmo=="Breadth-first search")
     {
         cout<<"Preferente por amplitud"<<endl;
         return;
     }
 
-    if(Algoritmo=="Costo uniforme")
+    if(Algoritmo=="Uniform-cost search")
     {
         cout<<"Costo uniforme"<<endl;
         return;
     }
 
-    if(Algoritmo=="Preferente por profundidad evitando ciclos")
+    if(Algoritmo=="Depth-first search (avoiding cycles)")
     {
         cout<<"Preferente por profundidad evitando ciclos"<<endl;
         return;
     }
 
-    if(Algoritmo=="Avara")
+    if(Algoritmo=="Greedy algorithm")
     {
         cout<<"Avara"<<endl;
         return;
@@ -190,5 +190,4 @@ void Ventana::correr()
         cout<<"A*"<<endl;
         return;
     }
-
 }
