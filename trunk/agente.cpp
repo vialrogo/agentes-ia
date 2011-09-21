@@ -44,6 +44,9 @@ string Agente::BuscarCostoUniforme(char **matInicial)
 
 string Agente::BuscarProfundidadEvitandoCiclos(char **matInicial)
 {
+    Nodo* inicio=new Nodo(matInicial,0,"",0,0);
+    string ruta= ptrProfundidadEvitandoCiclos->buscarSolucion(inicio);
+    return ruta;
 }
 
 string Agente::BuscarAvara(char **matInicial)

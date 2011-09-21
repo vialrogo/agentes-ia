@@ -179,7 +179,8 @@ void Ventana::correr()
 
     if(Algoritmo=="Depth-first search (avoiding cycles)")
     {
-        cout<<"Preferente por profundidad evitando ciclos"<<endl;
+        paraMover= miAgente->BuscarProfundidadEvitandoCiclos(matriz);
+        cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
         return;
     }
 
