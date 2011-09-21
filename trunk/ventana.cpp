@@ -173,7 +173,8 @@ void Ventana::correr()
 
     if(Algoritmo=="Uniform-cost search")
     {
-        cout<<"Costo uniforme"<<endl;
+        paraMover= miAgente->BuscarCostoUniforme(matriz);
+        cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
         return;
     }
 
