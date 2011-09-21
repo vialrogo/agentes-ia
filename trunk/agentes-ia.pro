@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     avara.cpp \
     aestrella.cpp \
     agente.cpp \
-    nodo.cpp
+    nodo.cpp \
+    priorityqueue.cpp
 
 HEADERS  += ventana.h \
     mapa.h \
@@ -32,7 +33,8 @@ HEADERS  += ventana.h \
     avara.h \
     aestrella.h \
     agente.h \
-    nodo.h
+    nodo.h \
+    priorityqueue.h
 
 FORMS    += ventana.ui
 
@@ -63,6 +65,8 @@ OTHER_FILES += \
     Documentacion/ejemplo2.in \
     Documentacion/ejemplo3.in \
     Documentacion/Proyecto1-2011.pdf
+
+
 
 
 
