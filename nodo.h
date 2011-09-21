@@ -24,7 +24,7 @@ public:
 
     void imprimir();
 
-    bool operator ==(Nodo* otroNodo);
+    bool operator== (Nodo* & otroNodo);
 };
 
 #endif // NODO_H
