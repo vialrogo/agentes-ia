@@ -29,7 +29,6 @@ HEADERS  += ventana.h \
     amplitud.h \
     costouniforme.h \
     profundidadevitandociclos.h \
-    profundidadevitandociclos.h \
     avara.h \
     aestrella.h \
     agente.h \

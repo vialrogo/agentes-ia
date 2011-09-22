@@ -7,6 +7,8 @@ Mapa::Mapa(int ancho, int alto,int n,int m,int c)
     N=n;
     M=m;
     CantidadCarros=c;
+    timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(animar()));
 }
 
 void Mapa::crearCuadros(char** matriz, bool* direcciones)
@@ -60,7 +62,33 @@ void Mapa::crearCuadros(char** matriz, bool* direcciones)
     }
 }
 
-void Mapa::moverCarro(char carro, int direccion, int casillas, bool *direcciones)
+void Mapa::iniciarAnimacion(string solucion,bool *direcciones){
+    this->solucion = QString::fromStdString(solucion);
+    this->direcciones = direcciones;
+    timer->start(1000);
+}
+
+void Mapa::animar(){
+    if(0 == solucion.size()){
+        timer->stop();
+    }
+    else{
+        QString l = solucion.left(3);
+        QString tmp;
+        solucion = solucion.right(solucion.size()-3);
+        qDebug() << ">" << l;
+        tmp = l.left(1);
+        l = l.right(2);
+        char a = tmp.toLocal8Bit().data()[0];
+        tmp = l.left(1);
+        l = l.right(1);
+        int b = tmp.left(2).toInt();
+        int c = l.left(3).toInt();
+        moverCarro(a,b,c);
+    }
+}
+
+void Mapa::moverCarro(char carro, int direccion, int casillas)
 {
     int anchoCelda = (W/M);
     int altoCelda = (H/N);
@@ -68,13 +96,12 @@ void Mapa::moverCarro(char carro, int direccion, int casillas, bool *direcciones
     int posX = carros[NumeroCarro]->offset().rx();
     int posY = carros[NumeroCarro]->offset().ry();
 
-
     if(direcciones[NumeroCarro]) //Movimiento vertical
     {
         if(direccion==1) //Moverse hacia arriba
             carros[NumeroCarro]->setOffset(posX,(posY - casillas*altoCelda));
         else //Moverse hacia abajo
-            carros[NumeroCarro]->setOffset(posX,(posY + casillas*altoCelda));
+           carros[NumeroCarro]->setOffset(posX,(posY + casillas*altoCelda));
     }
     else //Movimiento horizontal
     {
