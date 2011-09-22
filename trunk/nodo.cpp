@@ -1,4 +1,5 @@
 #include "nodo.h"
+#include <iostream> //temporal!!
 
 Nodo::Nodo(char** estadoIn, Nodo *padreIn, string operadorAplicadoIn, int profundidadIn, int costoIn)
 {
@@ -10,17 +11,17 @@ Nodo::Nodo(char** estadoIn, Nodo *padreIn, string operadorAplicadoIn, int profun
 }
 
 //Para evitar devolverme al estado inmediatamente anterior
-bool Nodo::operator== (Nodo* & otroNodo)
+bool Nodo::operator== (const Nodo& otroNodo) const
 {
     for (int i = 0; i < 7; ++i) {
         for (int j = 0; j < 7; ++j) {
-            if(this->getEstado()[i][j]!=otroNodo->getEstado()[i][j]) return false;
+            if(estado[i][j]!= (otroNodo.getEstado())[i][j]) return false;
         }
     }
     return true;
 }
 
-char** Nodo::getEstado()
+char** Nodo::getEstado() const
 {
     return estado;
 }
