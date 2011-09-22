@@ -1,6 +1,7 @@
 #ifndef MAPA_H
 #define MAPA_H
 
+#include "imagencarro.h"
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsSceneMouseEvent>
@@ -8,6 +9,7 @@
 #include <iostream>
 #include <QDebug>
 #include <QTimer>
+#include <QPropertyAnimation>
 
 using namespace std;
 
@@ -27,9 +29,13 @@ private:
     int H;
     int N;
     int M;
+    int tiempo;
+    char carroActual;
+    int dirreccionActual;
     int CantidadCarros;
+    int movimientoActual;
     bool *direcciones;
-    QGraphicsPixmapItem** carros;
+    imagencarro** carros;
     QTimer *timer;
     QString solucion;
 

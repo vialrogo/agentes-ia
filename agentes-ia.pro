@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     aestrella.cpp \
     agente.cpp \
     nodo.cpp \
-    priorityqueue.cpp
+    priorityqueue.cpp \
+    imagencarro.cpp
 
 HEADERS  += ventana.h \
     mapa.h \
@@ -33,7 +34,8 @@ HEADERS  += ventana.h \
     aestrella.h \
     agente.h \
     nodo.h \
-    priorityqueue.h
+    priorityqueue.h \
+    imagencarro.h
 
 FORMS    += ventana.ui
 
@@ -64,9 +66,3 @@ OTHER_FILES += \
     Documentacion/ejemplo2.in \
     Documentacion/ejemplo3.in \
     Documentacion/Proyecto1-2011.pdf
-
-
-
-
-
-

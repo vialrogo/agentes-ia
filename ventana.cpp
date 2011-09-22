@@ -176,6 +176,7 @@ void Ventana::correr()
     {
         paraMover= miAgente->BuscarCostoUniforme(matriz);
         cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
+        mapita->iniciarAnimacion(paraMover,direcciones);
         return;
     }
 
@@ -183,6 +184,7 @@ void Ventana::correr()
     {
         paraMover= miAgente->BuscarProfundidadEvitandoCiclos(matriz);
         cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
+        mapita->iniciarAnimacion(paraMover,direcciones);
         return;
     }
 
@@ -197,4 +199,6 @@ void Ventana::correr()
         cout<<"A*"<<endl;
         return;
     }
+
+
 }
