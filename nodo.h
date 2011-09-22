@@ -16,7 +16,7 @@ private:
 
 public:
     Nodo(char** estadoIn, Nodo *padreIn, string operadorAplicadoIn, int profundidadIn, int costoIn);
-    char** getEstado();
+    char** getEstado() const;
     Nodo* getPadre();
     string getOperadorAplicado();
     int getProfundidad();
@@ -24,7 +24,7 @@ public:
 
     void imprimir();
 
-    bool operator== (Nodo* & otroNodo);
+    bool operator== (const Nodo& otroNodo) const;
 };
 
 #endif // NODO_H

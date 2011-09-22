@@ -37,7 +37,8 @@ bool ProfundidadEvitandoCiclos::generaCiclo(Nodo *nodito)
     Nodo *tmp=nodito->getPadre();
     while(tmp!=0)
     {
-        if(nodito->operator ==(tmp)) cicloHallado=true;
+//        cout<<"aqui"<<endl;
+        if(*nodito == *tmp) cicloHallado=true;
         tmp=tmp->getPadre();
     }
     return cicloHallado;
