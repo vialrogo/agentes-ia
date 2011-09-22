@@ -168,6 +168,7 @@ void Ventana::correr()
     {
         paraMover= miAgente->BuscarAmplitud(matriz);
         cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
+        mapita->iniciarAnimacion(paraMover,direcciones);
         return;
     }
 
