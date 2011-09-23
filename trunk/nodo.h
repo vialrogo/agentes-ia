@@ -2,6 +2,7 @@
 #define NODO_H
 
 #include <string>
+#include <sstream>
 #include <iostream>
 using namespace std;
 
@@ -21,6 +22,7 @@ public:
     string getOperadorAplicado();
     int getProfundidad();
     int getCosto();
+    string getEstadoString();
 
     void imprimir();
 

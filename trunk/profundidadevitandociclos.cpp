@@ -19,8 +19,12 @@ string ProfundidadEvitandoCiclos::buscarSolucion(Nodo* estadoInicial)
     {
         while(!listaTmp->empty())
         {
-            if(!generaCiclo(listaTmp->back()))
+//            if(!generaCiclo(listaTmp->back()))
+            if(!set.contains(QString::fromStdString(listaTmp->back()->getEstadoString())))
+            {
                 miPila->push(listaTmp->back());
+                set.insert(QString::fromStdString(listaTmp->back()->getEstadoString()));
+            }
             listaTmp->pop_back();
         }
         actual=miPila->pop();
@@ -38,7 +42,10 @@ bool ProfundidadEvitandoCiclos::generaCiclo(Nodo *nodito)
     while(tmp!=0)
     {
 //        cout<<"aqui"<<endl;
-        if(*nodito == *tmp) cicloHallado=true;
+        if(*nodito == *tmp){
+            cicloHallado=true;
+            break;
+        }
         tmp=tmp->getPadre();
     }
     return cicloHallado;
