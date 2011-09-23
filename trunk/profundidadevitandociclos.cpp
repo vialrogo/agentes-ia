@@ -8,10 +8,8 @@ ProfundidadEvitandoCiclos::ProfundidadEvitandoCiclos(bool *dirIn) : Algoritmos(d
 
 string ProfundidadEvitandoCiclos::buscarSolucion(Nodo* estadoInicial)
 {
-//    cout <<"buscar Solución"<< endl;
-    set = new QSet<QString>();
     Nodo *actual=estadoInicial;
-    set->insert(QString::fromStdString(actual->getEstadoString()));
+    set.insert(QString::fromStdString(actual->getEstadoString()));
     QStack <Nodo*> *miPila= new QStack<Nodo*>();
     list<Nodo*> *listaTmp=new list<Nodo*>();
 
@@ -21,11 +19,10 @@ string ProfundidadEvitandoCiclos::buscarSolucion(Nodo* estadoInicial)
     {
         while(!listaTmp->empty())
         {
-//            if(!generaCiclo(listaTmp->back()))
-            if(!set->contains(QString::fromStdString(listaTmp->back()->getEstadoString())))
+            if(!set.contains(QString::fromStdString(listaTmp->back()->getEstadoString())))
             {
                 miPila->push(listaTmp->back());
-                set->insert(QString::fromStdString(listaTmp->back()->getEstadoString()));
+                set.insert(QString::fromStdString(listaTmp->back()->getEstadoString()));
             }
             listaTmp->pop_back();
         }
@@ -34,8 +31,6 @@ string ProfundidadEvitandoCiclos::buscarSolucion(Nodo* estadoInicial)
         listaTmp=0;
         listaTmp=expandir(actual);
     }
-    set->clear();
-    delete set;
     return actual->getOperadorAplicado(); //Ventana se encarga de traducir ese string :P
 }
 
