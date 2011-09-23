@@ -21,7 +21,7 @@ class Mapa: public QGraphicsScene
 public:
     Mapa(int ancho, int alto,int n,int m,int c);
     void crearCuadros(char** matriz, bool* direcciones);
-    void moverCarro(char carro, int direccion, int casillas);
+    void moverCarro(char carro, int direccion);
     void iniciarAnimacion(string solucion,bool *direcciones);
 
 private:
@@ -33,7 +33,6 @@ private:
     char carroActual;
     int dirreccionActual;
     int CantidadCarros;
-    int movimientoActual;
     bool *direcciones;
     imagencarro** carros;
     QTimer *timer;

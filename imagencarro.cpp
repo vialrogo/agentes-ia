@@ -34,7 +34,7 @@ void imagencarro::animatePosition(const QPointF& end)
     QPropertyAnimation* anim = new QPropertyAnimation(this, "pos");
 
     // 2 second duration animation
-    anim->setDuration(1000);
+    anim->setDuration(100);
     // position to start animation
     //anim->setStartValue(start);
     // end position of animation
