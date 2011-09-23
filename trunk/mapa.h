@@ -38,6 +38,7 @@ private:
     imagencarro** carros;
     QTimer *timer;
     QString solucion;
+    QPoint posicionesCarro[7];
 
 private slots:
     void animar();
