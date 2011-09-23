@@ -1,5 +1,4 @@
 #include "nodo.h"
-#include <iostream> //temporal!!
 
 Nodo::Nodo(char** estadoIn, Nodo *padreIn, string operadorAplicadoIn, int profundidadIn, int costoIn)
 {
@@ -24,6 +23,17 @@ bool Nodo::operator== (const Nodo& otroNodo) const
 char** Nodo::getEstado() const
 {
     return estado;
+}
+
+string Nodo::getEstadoString()
+{
+    string resp="";
+    ostringstream tmp;
+    for (int var = 0; var < 7; var++) {
+        tmp<<estado[var];
+    }
+    resp=tmp.str();
+    return resp;
 }
 
 Nodo* Nodo::getPadre()
