@@ -49,6 +49,7 @@ void Mapa::crearCuadros(char** matriz, bool* direcciones)
                 QString ruta = QString("Imagenes/%1%2.png").arg(letra).arg(orientacion);
                 carros[tmp]= new imagencarro(QSizeF(65*7,65*7),QPixmap (ruta),this);
                 carros[tmp]->setOffset (j*anchoCelda,i*altoCelda);
+                posicionesCarro[tmp]= QPoint(0,0);
                 this->addItem(carros[tmp]);
             }
 
@@ -66,7 +67,7 @@ void Mapa::crearCuadros(char** matriz, bool* direcciones)
 void Mapa::iniciarAnimacion(string solucion,bool *direcciones){
     this->solucion = QString::fromStdString(solucion);
     this->direcciones = direcciones;
-    timer->start(1000);
+    timer->start(100);
 }
 
 void Mapa::animar(){
@@ -102,21 +103,35 @@ void Mapa::moverCarro(char carro, int direccion, int casillas)
     int anchoCelda = (W/M);
     int altoCelda = (H/N);
     int NumeroCarro = (carro - 65);
-    //int posX = carros[NumeroCarro]->offset().rx();
-    //int posY = carros[NumeroCarro]->offset().ry();
+    int posX = posicionesCarro[NumeroCarro].rx();
+    int posY = posicionesCarro[NumeroCarro].ry();
+
+    cout<<"posX: "<<posX<<" posY: "<<posY<<endl;
 
     if(direcciones[NumeroCarro]) //Movimiento vertical
     {
         if(direccion==1) //Moverse hacia arriba
-           carros[NumeroCarro]->animatePosition(QPointF(0,(-1*casillas)*altoCelda));
+        {
+           carros[NumeroCarro]->animatePosition(QPointF(posX,((-1*1)*altoCelda)+posY));
+           posicionesCarro[NumeroCarro].setY(((-1*1)*altoCelda)+posY);
+        }
         else //Moverse hacia abajo
-           carros[NumeroCarro]->animatePosition(QPointF(0,casillas*altoCelda));
+        {
+           carros[NumeroCarro]->animatePosition(QPointF(posX,(1*altoCelda)+posY));
+           posicionesCarro[NumeroCarro].setY((1*altoCelda)+posY);
+        }
     }
     else //Movimiento horizontal
     {
         if(direccion==1) //Moverse hacia la derecha
-            carros[NumeroCarro]->animatePosition(QPointF(casillas*anchoCelda,0));
+        {
+            carros[NumeroCarro]->animatePosition(QPointF(posX+(1*anchoCelda),posY));
+            posicionesCarro[NumeroCarro].setX((1*anchoCelda)+posX);
+        }
         else //Moverse hacia la izquierda
-            carros[NumeroCarro]->animatePosition(QPointF((-1*casillas)*anchoCelda,0));
+        {
+            carros[NumeroCarro]->animatePosition(QPointF(posX+((-1*1)*anchoCelda),posY));
+            posicionesCarro[NumeroCarro].setX((-1*1*anchoCelda)+posX);
+        }
     }
 }
