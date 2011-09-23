@@ -10,7 +10,7 @@ class ProfundidadEvitandoCiclos : public Algoritmos
 {
 private:
     bool *direcciones;
-    QSet<QString> set;
+    QSet<QString> *set;
 public:
     ProfundidadEvitandoCiclos(bool *dirIn);
     string buscarSolucion(Nodo* estadoInicial);
