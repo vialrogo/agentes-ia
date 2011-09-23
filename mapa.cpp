@@ -109,7 +109,7 @@ void Mapa::moverCarro(char carro, int direccion)
     int posX = posicionesCarro[NumeroCarro].rx();
     int posY = posicionesCarro[NumeroCarro].ry();
 
-    cout<<"posX: "<<posX<<" posY: "<<posY<<endl;
+//    cout<<"posX: "<<posX<<" posY: "<<posY<<endl;
 
     if(direcciones[NumeroCarro]) //Movimiento vertical
     {
