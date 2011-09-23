@@ -28,11 +28,11 @@ char** Nodo::getEstado() const
 string Nodo::getEstadoString()
 {
     string resp="";
-    ostringstream tmp;
     for (int var = 0; var < 7; var++) {
-        tmp<<estado[var];
+        for (int var2 = 0; var2 < 7; var2++) {
+            resp+=estado[var][var2];
+        }
     }
-    resp=tmp.str();
     return resp;
 }
 
