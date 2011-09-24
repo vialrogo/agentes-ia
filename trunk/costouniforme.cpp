@@ -7,27 +7,26 @@ CostoUniforme::CostoUniforme(bool *dirIn)
 }
 
 string CostoUniforme::buscarSolucion(Nodo *estadoInicial)
-{
+{ // no funciona, creo que falta calcular el costo
+
     Nodo *actual=estadoInicial;
-//    QQueue<Nodo*> *miCola= new QQueue<Nodo*>();
-//    list<Nodo*> *listaTmp=new list<Nodo*>();
+    PriorityQueue<Nodo*> *miCola= new PriorityQueue<Nodo*>();
+    list<Nodo*> *listaTmp=new list<Nodo*>();
 
-//    listaTmp =expandir(actual);
-//    while(listaTmp!=0)
-//    {
-//        while(!listaTmp->empty())
-//        {
-////            listaTmp->front()->imprimir();
-//            if(!(listaTmp->front()== actual->getPadre()))
-//                miCola->enqueue(listaTmp->front());
-//            listaTmp->pop_front();
-//        }
-//        actual=miCola->dequeue();
-//        listaTmp=0;
-//        listaTmp =expandir(actual);
-//    }
+    listaTmp =expandir(actual);
+    while(listaTmp!=0)
+    {
+        while(!listaTmp->empty())
+        {
+            listaTmp->front()->imprimir();
+            if(!(listaTmp->front()== actual->getPadre()))
+                miCola->enqueue(listaTmp->front()->getCosto(), listaTmp->front());
+            listaTmp->pop_front();
+        }
+        actual=miCola->dequeue();
+        listaTmp=0;
+        listaTmp =expandir(actual);
+    }
 
-//    return actual->getOperadorAplicado(); //Ventana se encarga de traducir ese string :P
-
-    return " ";
+    return actual->getOperadorAplicado(); //Ventana se encarga de traducir ese string :P
 }
