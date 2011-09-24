@@ -2,6 +2,7 @@
 #define COSTOUNIFORME_H
 
 #include "algoritmos.h"
+#include "priorityqueue.cpp"
 
 class CostoUniforme : public Algoritmos
 {
