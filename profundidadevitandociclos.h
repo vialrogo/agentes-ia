@@ -14,7 +14,6 @@ private:
 public:
     ProfundidadEvitandoCiclos(bool *dirIn);
     string buscarSolucion(Nodo* estadoInicial);
-    bool generaCiclo(Nodo *nodito);
 };
 
 #endif // PROFUNDIDADEVITANDOCICLOS_H
