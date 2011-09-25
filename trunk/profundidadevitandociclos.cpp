@@ -34,22 +34,6 @@ string ProfundidadEvitandoCiclos::buscarSolucion(Nodo* estadoInicial)
     return actual->getOperadorAplicado(); //Ventana se encarga de traducir ese string :P
 }
 
-bool ProfundidadEvitandoCiclos::generaCiclo(Nodo *nodito)
-{
-    bool cicloHallado=false;
-    Nodo *tmp=nodito->getPadre();
-    while(tmp!=0)
-    {
-//        cout<<"aqui"<<endl;
-        if(*nodito == *tmp){
-            cicloHallado=true;
-            break;
-        }
-        tmp=tmp->getPadre();
-    }
-    return cicloHallado;
-}
-
 //int main(){
 //    ProfundidadEvitandoCiclos *ensayo;
 
