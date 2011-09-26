@@ -22,6 +22,7 @@ string Amplitud::buscarSolucion(Nodo *estadoInicial)
             listaTmp->pop_front();
         }
         actual=miCola->dequeue();
+//        cout<<miCola->size()<<endl;
         listaTmp=0;
         listaTmp =expandir(actual);
     }

@@ -3,11 +3,13 @@
 
 #include "algoritmos.h"
 #include <queue>
+#include <QSet>
 
 class CostoUniforme : public Algoritmos
 {
 private:
     bool *direcciones;
+    QSet<QString> set;
 public:
     CostoUniforme(bool *dirIn);
     string buscarSolucion(Nodo* estadoInicial);
@@ -15,15 +17,20 @@ public:
 
 class mycomparison
 {
-  bool reverse;
+private:
+    bool reverse;
+
 public:
-  mycomparison(const bool& revparam=false)
-    {reverse=revparam;}
-  bool operator() (Nodo* lh, Nodo* rhs) const
-  {
-    if (reverse) return (lh->getCosto()>rhs->getCosto());
-    else return (lh->getCosto()<rhs->getCosto());
-  }
+    mycomparison(const bool& revparam=false)
+    {
+        reverse=revparam;
+    }
+
+    bool operator() (Nodo* lh, Nodo* rhs) const
+    {
+        if (reverse) return (lh->getCosto()>rhs->getCosto());
+        else return (lh->getCosto()<rhs->getCosto());
+    }
 };
 
 
