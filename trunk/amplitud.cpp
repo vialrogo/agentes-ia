@@ -9,6 +9,7 @@ Amplitud::Amplitud(bool *dirIn) : Algoritmos(dirIn)
 string Amplitud::buscarSolucion(Nodo *estadoInicial)
 {
     Nodo *actual=estadoInicial;
+    set.insert(QString::fromStdString(actual->getEstadoString()));
     QQueue<Nodo*> *miCola= new QQueue<Nodo*>();
     list<Nodo*> *listaTmp=new list<Nodo*>();
 
@@ -17,12 +18,16 @@ string Amplitud::buscarSolucion(Nodo *estadoInicial)
     {
         while(!listaTmp->empty())
         {
-            if(!(listaTmp->front()->esIgualA(actual->getPadre())))
+//            if(!(listaTmp->front()->esIgualA(actual->getPadre())))
+            if(!set.contains(QString::fromStdString(listaTmp->front()->getEstadoString())))
+            {
                 miCola->enqueue(listaTmp->front());
+                set.insert(QString::fromStdString(listaTmp->front()->getEstadoString()));
+            }
             listaTmp->pop_front();
         }
         actual=miCola->dequeue();
-//        cout<<miCola->size()<<endl;
+        cout<<miCola->size()<<endl;
         listaTmp=0;
         listaTmp =expandir(actual);
     }
