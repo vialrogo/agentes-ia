@@ -9,7 +9,10 @@ CostoUniforme::CostoUniforme(bool *dirIn) : Algoritmos(dirIn)
 string CostoUniforme::buscarSolucion(Nodo *estadoInicial)
 {
     Nodo *actual=estadoInicial;
-    PriorityQueue<Nodo*> *miCola= new PriorityQueue<Nodo*>();
+
+    //Cola de prioridad
+    priority_queue<Nodo*,vector<Nodo*>,mycomparison> miCola(mycomparison(true));
+
     list<Nodo*> *listaTmp=new list<Nodo*>();
 
     listaTmp =expandir(actual);
@@ -17,19 +20,15 @@ string CostoUniforme::buscarSolucion(Nodo *estadoInicial)
     {
         while(!listaTmp->empty())
         {
-//            listaTmp->front()->imprimir();
-//            if(!(listaTmp->front()== actual->getPadre()))
             if(!(listaTmp->front()->esIgualA(actual->getPadre())))
-            {
-//                cout<<"costo: "<<listaTmp->front()->getCosto()<<endl;
-//                listaTmp->front()->imprimir();
-                miCola->enqueue(listaTmp->front()->getCosto(), listaTmp->front());
-            }
+                miCola.push(listaTmp->front());
             listaTmp->pop_front();
         }
-        actual=miCola->dequeue();
+        actual=miCola.top();
+        miCola.pop();
         listaTmp=0;
         listaTmp =expandir(actual);
     }
+
     return actual->getOperadorAplicado();
 }

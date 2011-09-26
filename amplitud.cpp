@@ -28,7 +28,6 @@ string Amplitud::buscarSolucion(Nodo *estadoInicial)
 
     return actual->getOperadorAplicado();
 }
-
 //int main(){
 //    Amplitud *ensayo;
 
