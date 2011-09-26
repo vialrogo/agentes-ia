@@ -26,7 +26,7 @@ public:
 
     void imprimir();
 
-    bool operator== (const Nodo& otroNodo) const;
+    bool esIgualA(Nodo* otroNodo);
 };
 
 #endif // NODO_H

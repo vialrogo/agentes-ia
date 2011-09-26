@@ -26,7 +26,7 @@ template <class C> struct Clausura
     }
 };
 
-QQueue< Clausura<T> > cola;
+QQueue< Clausura<T> >* cola;
 };
 
 #endif // PRIORITYQUEUE_H

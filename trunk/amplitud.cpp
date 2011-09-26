@@ -17,8 +17,7 @@ string Amplitud::buscarSolucion(Nodo *estadoInicial)
     {
         while(!listaTmp->empty())
         {
-//            listaTmp->front()->imprimir();
-            if(!(listaTmp->front()== actual->getPadre()))
+            if(!(listaTmp->front()->esIgualA(actual->getPadre())))
                 miCola->enqueue(listaTmp->front());
             listaTmp->pop_front();
         }
@@ -27,7 +26,7 @@ string Amplitud::buscarSolucion(Nodo *estadoInicial)
         listaTmp =expandir(actual);
     }
 
-    return actual->getOperadorAplicado(); //Ventana se encarga de traducir ese string :P
+    return actual->getOperadorAplicado();
 }
 
 //int main(){
