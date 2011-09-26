@@ -27,7 +27,7 @@ string CostoUniforme::buscarSolucion(Nodo *estadoInicial)
         }
         actual=miCola->top();
         miCola->pop();
-        cout<<miCola->size()<<endl;
+//        cout<<miCola->size()<<endl;
         listaTmp=0;
         listaTmp =expandir(actual);
     }

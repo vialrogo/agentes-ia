@@ -14,6 +14,7 @@ private:
     string operadorAplicado;
     int profundidad;
     int costo;
+    int heuristica;//Cantidad de casillas entre A y la meta + la cantidad de casillas ocupadas entre A y la meta.
 
 public:
     Nodo(char** estadoIn, Nodo *padreIn, string operadorAplicadoIn, int profundidadIn, int costoIn);
@@ -23,6 +24,8 @@ public:
     int getProfundidad();
     int getCosto();
     string getEstadoString();
+    void setHeuristica(int heurIn);
+    int getHeuristica();
 
     void imprimir();
 

@@ -27,7 +27,7 @@ string ProfundidadEvitandoCiclos::buscarSolucion(Nodo* estadoInicial)
             listaTmp->pop_back();
         }
         actual=miPila->pop();
-        cout<<miPila->size()<<endl;
+//        cout<<miPila->size()<<endl;
         listaTmp=0;
         listaTmp=expandir(actual);
     }

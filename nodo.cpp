@@ -56,6 +56,16 @@ int Nodo::getCosto()
     return costo;
 }
 
+void Nodo::setHeuristica(int heurIn)
+{
+    heuristica=heurIn;
+}
+
+int Nodo::getHeuristica()
+{
+    return heuristica;
+}
+
 void Nodo::imprimir()
 {
     for (int var = 0; var < 7; var++) {

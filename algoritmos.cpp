@@ -211,8 +211,11 @@ list<Nodo*>* Algoritmos::expandir(Nodo *nodito)
 {
     list<Nodo*> *respuesta=0;
     QPoint *puntoTmp;
-    if(esMeta(nodito->getEstado())) return respuesta;
+    string opTotal="";
+    int heurTmp=0;
 
+    if(esMeta(nodito->getEstado()))
+        return respuesta;
     else{
         respuesta=new list<Nodo*>();
 
@@ -227,22 +230,37 @@ list<Nodo*>* Algoritmos::expandir(Nodo *nodito)
 
                     if(puntoTmp->x()!=-1 && puntoTmp->y()!=-1)
                     {
-                        string opTotal=nodito->getOperadorAplicado();
+                        opTotal=nodito->getOperadorAplicado();
                         ostringstream opApp;
                         opApp<<car;
                         opApp<<j;
                         opApp<<k;
                         opTotal+=opApp.str();
+                        Nodo *tmp=new Nodo(mover(puntoTmp,j,k,nodito->getEstado()),nodito,opTotal,
+                                     nodito->getProfundidad()+1, nodito->getCosto()+k);
 
-                        respuesta->push_back(new Nodo(mover(puntoTmp,j,k,nodito->getEstado()),
-                                                      nodito,opTotal,nodito->getProfundidad()+1,
-                                                      nodito->getCosto()+k));
+                        heurTmp=calcularHeuristica(tmp->getEstado());
+                        tmp->setHeuristica(heurTmp);
+
+                        respuesta->push_back(tmp);
                     }
                 }
             }
         }
         return respuesta;
     }
+}
+
+int Algoritmos::calcularHeuristica(char** estadoActual)
+{
+    int resp=0;
+    for(int i=2; i<7; i++)
+    {
+        if(estadoActual[2][i]=='A') resp=0;
+        else if(estadoActual[2][i]=='0') resp++;
+        else resp+=2;
+    }
+    return resp;
 }
 
 //void Algoritmos::imprimir(char** mat)

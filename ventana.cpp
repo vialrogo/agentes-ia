@@ -193,7 +193,9 @@ void Ventana::correr()
 
     if(Algoritmo=="Greedy algorithm")
     {
-        cout<<"Avara"<<endl;
+        paraMover= miAgente->BuscarAvara(matriz);
+        cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
+        mapita->iniciarAnimacion(paraMover,direcciones);
         return;
     }
 

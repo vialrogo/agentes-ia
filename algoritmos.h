@@ -25,6 +25,7 @@ public:
     Algoritmos();
     Algoritmos(bool *dirIn);
     list<Nodo*>* expandir(Nodo *nodito);
+    int calcularHeuristica(char** estadoActual);
 //    void imprimir(char** mat);
 };
 
