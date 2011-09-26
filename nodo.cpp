@@ -9,12 +9,12 @@ Nodo::Nodo(char** estadoIn, Nodo *padreIn, string operadorAplicadoIn, int profun
     costo=costoIn;
 }
 
-//Para evitar devolverme al estado inmediatamente anterior
-bool Nodo::operator== (const Nodo& otroNodo) const
+bool Nodo::esIgualA(Nodo *otroNodo)
 {
+    if(otroNodo==0) return false;
     for (int i = 0; i < 7; ++i) {
         for (int j = 0; j < 7; ++j) {
-            if(estado[i][j]!= (otroNodo.getEstado())[i][j]) return false;
+            if(estado[i][j]!= (otroNodo->getEstado())[i][j]) return false;
         }
     }
     return true;
