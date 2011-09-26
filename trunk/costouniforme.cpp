@@ -9,10 +9,8 @@ CostoUniforme::CostoUniforme(bool *dirIn) : Algoritmos(dirIn)
 string CostoUniforme::buscarSolucion(Nodo *estadoInicial)
 {
     Nodo *actual=estadoInicial;
-
-    //Cola de prioridad
-    priority_queue<Nodo*,vector<Nodo*>,mycomparison> miCola(mycomparison(true));
-
+    set.insert(QString::fromStdString(actual->getEstadoString()));
+    priority_queue<Nodo*,vector<Nodo*>,mycomparison> *miCola = new priority_queue<Nodo*,vector<Nodo*>,mycomparison>(mycomparison(true));
     list<Nodo*> *listaTmp=new list<Nodo*>();
 
     listaTmp =expandir(actual);
@@ -20,12 +18,16 @@ string CostoUniforme::buscarSolucion(Nodo *estadoInicial)
     {
         while(!listaTmp->empty())
         {
-            if(!(listaTmp->front()->esIgualA(actual->getPadre())))
-                miCola.push(listaTmp->front());
+            if(!set.contains(QString::fromStdString(listaTmp->front()->getEstadoString())))
+            {
+                miCola->push(listaTmp->front());
+                set.insert(QString::fromStdString(listaTmp->front()->getEstadoString()));
+            }
             listaTmp->pop_front();
         }
-        actual=miCola.top();
-        miCola.pop();
+        actual=miCola->top();
+        miCola->pop();
+//        cout<<miCola->size()<<endl;
         listaTmp=0;
         listaTmp =expandir(actual);
     }
