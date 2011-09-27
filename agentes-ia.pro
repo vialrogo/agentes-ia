@@ -38,7 +38,9 @@ OTHER_FILES += \
     Documentacion/ejemplo.in \
     Documentacion/ejemplo2.in \
     Documentacion/ejemplo3.in \
-    Documentacion/ejemplo5.in
+    Documentacion/ejemplo5.in \
+    Documentacion/ejemplo6.in
+
 
 
 
