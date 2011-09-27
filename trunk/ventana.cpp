@@ -201,7 +201,9 @@ void Ventana::correr()
 
     if(Algoritmo=="A*")
     {
-        cout<<"A*"<<endl;
+        paraMover= miAgente->BuscarAEstrella(matriz);
+        cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
+        mapita->iniciarAnimacion(paraMover,direcciones);
         return;
     }
 

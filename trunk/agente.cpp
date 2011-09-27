@@ -27,8 +27,8 @@ void Agente::setDireciones(bool *dirIn)
     ptrAmplitud = new Amplitud(dirIn);
     ptrCostoUniforme = new CostoUniforme(dirIn);
     ptrProfundidadEvitandoCiclos = new ProfundidadEvitandoCiclos(dirIn);
-//    ptrAvara = new Avara(dirIn);
-//    ptrAEstrella = new AEstrella(dirIn);
+    ptrAvara = new Avara(dirIn);
+    ptrAEstrella = new AEstrella(dirIn);
 }
 
 string Agente::BuscarAmplitud(char **matInicial)
@@ -65,4 +65,8 @@ string Agente::BuscarAvara(char **matInicial)
 
 string Agente::BuscarAEstrella(char **matInicial)
 {
+    Nodo* inicio=new Nodo(matInicial,0,"",0,0);
+    inicio->setHeuristica(ptrAEstrella->calcularHeuristica(matInicial));
+    string ruta= ptrAEstrella->buscarSolucion(inicio);
+    return ruta;
 }

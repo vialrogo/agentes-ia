@@ -7,6 +7,7 @@ Nodo::Nodo(char** estadoIn, Nodo *padreIn, string operadorAplicadoIn, int profun
     operadorAplicado=operadorAplicadoIn;
     profundidad=profundidadIn;
     costo=costoIn;
+    heuristica=0;
 }
 
 bool Nodo::esIgualA(Nodo *otroNodo)
