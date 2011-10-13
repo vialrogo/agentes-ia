@@ -3,16 +3,18 @@
 
 #include "algoritmos.h"
 #include <queue>
-#include <QSet>
 
 class Avara : public Algoritmos
 {
 private:
     bool *direcciones;
-    QSet<QString> set;
+    int altura;
+    int expandidos;
+    double tiempoComputo;
 public:
     Avara(bool *dirIn);
     string buscarSolucion(Nodo* estadoInicial);
+    string sacarDatos();
 };
 
 class comparaHeuristicas

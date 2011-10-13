@@ -10,9 +10,13 @@ class AEstrella : public Algoritmos
 private:
     bool *direcciones;
     QSet<QString> set;
+    int altura;
+    int expandidos;
+    double tiempoComputo;
 public:
     AEstrella(bool *dirIn);
     string buscarSolucion(Nodo* estadoInicial);
+    string sacarDatos();
 };
 
 class comparaHeuristicasCosto

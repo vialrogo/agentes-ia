@@ -4,6 +4,9 @@ ProfundidadEvitandoCiclos::ProfundidadEvitandoCiclos(bool *dirIn) : Algoritmos(d
 {
     direcciones= new bool[7]; //true para vertical, false para horizontal
     for(int i=0; i<7; i++) direcciones[i]=dirIn[i];
+    altura=0;
+    expandidos=0;
+    tiempoComputo=0;
 }
 
 string ProfundidadEvitandoCiclos::buscarSolucion(Nodo* estadoInicial)
@@ -32,6 +35,18 @@ string ProfundidadEvitandoCiclos::buscarSolucion(Nodo* estadoInicial)
         listaTmp=expandir(actual);
     }
     return actual->getOperadorAplicado(); //Ventana se encarga de traducir ese string :P
+}
+
+string ProfundidadEvitandoCiclos::sacarDatos()
+{
+    ostringstream tmp;
+    tmp<<expandidos;
+    tmp<<" ";
+    tmp<<altura;
+    tmp<<" ";
+    tmp<<tiempoComputo;
+
+    return tmp.str();
 }
 
 //int main(){

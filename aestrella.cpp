@@ -4,6 +4,9 @@ AEstrella::AEstrella(bool *dirIn) : Algoritmos(dirIn)
 {
     direcciones= new bool[7]; //true para vertical, false para horizontal
     for(int i=0; i<7; i++) direcciones[i]=dirIn[i];
+    altura=0;
+    expandidos=0;
+    tiempoComputo=0;
 }
 
 string AEstrella::buscarSolucion(Nodo *estadoInicial)
@@ -33,4 +36,16 @@ string AEstrella::buscarSolucion(Nodo *estadoInicial)
     }
 
     return actual->getOperadorAplicado();
+}
+
+string AEstrella::sacarDatos()
+{
+    ostringstream tmp;
+    tmp<<expandidos;
+    tmp<<" ";
+    tmp<<altura;
+    tmp<<" ";
+    tmp<<tiempoComputo;
+
+    return tmp.str();
 }
