@@ -1,6 +1,6 @@
 #include "agente.h"
 
-Agente::Agente()
+Agente::Agente() : QThread()
 {
     direcciones=new bool[7];
     for (int var = 0; var < 7; var++) direcciones[var]=false;
@@ -31,44 +31,60 @@ void Agente::setDireciones(bool *dirIn)
     ptrAEstrella = new AEstrella(dirIn);
 }
 
-string Agente::BuscarAmplitud(char **matInicial)
+void Agente::run()
 {
-    Nodo* inicio=new Nodo(matInicial,0,"",0,0);
-    inicio->setHeuristica(ptrAmplitud->calcularHeuristica(matInicial));
-    string ruta= ptrAmplitud->buscarSolucion(inicio);
-//    ruta+=".";
-//    ruta+=ptrAmplitud->sacarDatos();
-    return ruta;
+    Nodo* inicio=new Nodo(matrizInicial,0,"",0,0);
+    string ruta="";
+
+    switch(cual)
+    {
+    case 0:
+        inicio->setHeuristica(ptrAmplitud->calcularHeuristica(matrizInicial));
+        ruta= ptrAmplitud->buscarSolucion(inicio);
+    //    ruta+=".";
+    //    ruta+=ptrAmplitud->sacarDatos();
+        break;
+    case 1:
+        inicio->setHeuristica(ptrCostoUniforme->calcularHeuristica(matrizInicial));
+        ruta= ptrCostoUniforme->buscarSolucion(inicio);
+    //    ruta+=".";
+    //    ruta+=ptrAmplitud->sacarDatos();
+        break;
+    case 2:
+        inicio->setHeuristica(ptrProfundidadEvitandoCiclos->calcularHeuristica(matrizInicial));
+        ruta= ptrProfundidadEvitandoCiclos->buscarSolucion(inicio);
+    //    ruta+=".";
+    //    ruta+=ptrAmplitud->sacarDatos();
+        break;
+    case 3:
+        inicio->setHeuristica(ptrAvara->calcularHeuristica(matrizInicial));
+        ruta= ptrAvara->buscarSolucion(inicio);
+    //    ruta+=".";
+    //    ruta+=ptrAmplitud->sacarDatos();
+        break;
+    case 4:
+        inicio->setHeuristica(ptrAEstrella->calcularHeuristica(matrizInicial));
+        ruta= ptrAEstrella->buscarSolucion(inicio);
+    //    ruta+=".";
+    //    ruta+=ptrAmplitud->sacarDatos();
+        break;
+    default: break;
+    }
+
+    solucion=ruta;
 }
 
-string Agente::BuscarCostoUniforme(char **matInicial)
+void Agente::setCual(int cual_in)
 {
-    Nodo* inicio=new Nodo(matInicial,0,"",0,0);
-    inicio->setHeuristica(ptrCostoUniforme->calcularHeuristica(matInicial));
-    string ruta= ptrCostoUniforme->buscarSolucion(inicio);
-    return ruta;
+    cual=cual_in;
 }
 
-string Agente::BuscarProfundidadEvitandoCiclos(char **matInicial)
+void Agente::serMatrizInicial(char **matrizInicial_in)
 {
-    Nodo* inicio=new Nodo(matInicial,0,"",0,0);
-    inicio->setHeuristica(ptrProfundidadEvitandoCiclos->calcularHeuristica(matInicial));
-    string ruta= ptrProfundidadEvitandoCiclos->buscarSolucion(inicio);
-    return ruta;
+    matrizInicial=matrizInicial_in;
 }
 
-string Agente::BuscarAvara(char **matInicial)
+string Agente::getSolucion()
 {
-    Nodo* inicio=new Nodo(matInicial,0,"",0,0);
-    inicio->setHeuristica(ptrAvara->calcularHeuristica(matInicial));
-    string ruta= ptrAvara->buscarSolucion(inicio);
-    return ruta;
-}
-
-string Agente::BuscarAEstrella(char **matInicial)
-{
-    Nodo* inicio=new Nodo(matInicial,0,"",0,0);
-    inicio->setHeuristica(ptrAEstrella->calcularHeuristica(matInicial));
-    string ruta= ptrAEstrella->buscarSolucion(inicio);
-    return ruta;
+    return solucion;
 }

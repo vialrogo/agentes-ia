@@ -9,7 +9,7 @@ Avara::Avara(bool *dirIn) : Algoritmos(dirIn)
 string Avara::buscarSolucion(Nodo *estadoInicial)
 {
     Nodo *actual=estadoInicial;
-    set.insert(QString::fromStdString(actual->getEstadoString()));
+//    set.insert(QString::fromStdString(actual->getEstadoString()));
     priority_queue<Nodo*,vector<Nodo*>,comparaHeuristicas> *miCola = new priority_queue<Nodo*,vector<Nodo*>,comparaHeuristicas>(comparaHeuristicas(true));
     list<Nodo*> *listaTmp=new list<Nodo*>();
 
@@ -21,7 +21,7 @@ string Avara::buscarSolucion(Nodo *estadoInicial)
 //            if(!set.contains(QString::fromStdString(listaTmp->front()->getEstadoString())))
 //            {
                 miCola->push(listaTmp->front());
-                set.insert(QString::fromStdString(listaTmp->front()->getEstadoString()));
+//                set.insert(QString::fromStdString(listaTmp->front()->getEstadoString()));
 //            }
             listaTmp->pop_front();
         }

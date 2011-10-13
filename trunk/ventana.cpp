@@ -171,7 +171,10 @@ void Ventana::correr()
 
     if(Algoritmo=="Breadth-first search")
     {
-        paraMover= miAgente->BuscarAmplitud(matriz);
+        miAgente->setCual(0);
+        miAgente->serMatrizInicial(matriz);
+        miAgente->run();
+        paraMover= miAgente->getSolucion();
         cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
         mapita->iniciarAnimacion(paraMover,direcciones);
         return;
@@ -179,7 +182,10 @@ void Ventana::correr()
 
     if(Algoritmo=="Uniform-cost search")
     {
-        paraMover= miAgente->BuscarCostoUniforme(matriz);
+        miAgente->setCual(1);
+        miAgente->serMatrizInicial(matriz);
+        miAgente->run();
+        paraMover= miAgente->getSolucion();
         cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
         mapita->iniciarAnimacion(paraMover,direcciones);
         return;
@@ -187,7 +193,10 @@ void Ventana::correr()
 
     if(Algoritmo=="Depth-first search (avoiding cycles)")
     {
-        paraMover= miAgente->BuscarProfundidadEvitandoCiclos(matriz);
+        miAgente->setCual(2);
+        miAgente->serMatrizInicial(matriz);
+        miAgente->run();
+        paraMover= miAgente->getSolucion();
         cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
         mapita->iniciarAnimacion(paraMover,direcciones);
         return;
@@ -195,7 +204,10 @@ void Ventana::correr()
 
     if(Algoritmo=="Greedy algorithm")
     {
-        paraMover= miAgente->BuscarAvara(matriz);
+        miAgente->setCual(3);
+        miAgente->serMatrizInicial(matriz);
+        miAgente->run();
+        paraMover= miAgente->getSolucion();
         cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
         mapita->iniciarAnimacion(paraMover,direcciones);
         return;
@@ -203,7 +215,10 @@ void Ventana::correr()
 
     if(Algoritmo=="A*")
     {
-        paraMover= miAgente->BuscarAEstrella(matriz);
+        miAgente->setCual(4);
+        miAgente->serMatrizInicial(matriz);
+        miAgente->run();
+        paraMover= miAgente->getSolucion();
         cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
         mapita->iniciarAnimacion(paraMover,direcciones);
         return;
