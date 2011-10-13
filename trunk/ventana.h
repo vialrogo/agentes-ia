@@ -10,6 +10,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <iostream>
+#include <string>
 #include <fstream>
 #include "mapa.h"
 #include "agente.h"

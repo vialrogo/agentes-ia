@@ -163,6 +163,8 @@ void Ventana::correr()
 {
     QString Algoritmo = ui->comboBoxAlgoritmos->currentText();
     string paraMover="";
+    size_t pos=0;
+    string datos="";
     ui->radioButtonInformed->setEnabled(false);
     ui->radioButtonUninformed->setEnabled(false);
     ui->comboBoxAlgoritmos->setEnabled(false);

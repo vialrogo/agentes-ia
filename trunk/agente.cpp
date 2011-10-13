@@ -36,6 +36,8 @@ string Agente::BuscarAmplitud(char **matInicial)
     Nodo* inicio=new Nodo(matInicial,0,"",0,0);
     inicio->setHeuristica(ptrAmplitud->calcularHeuristica(matInicial));
     string ruta= ptrAmplitud->buscarSolucion(inicio);
+//    ruta+=".";
+//    ruta+=ptrAmplitud->sacarDatos();
     return ruta;
 }
 
