@@ -18,11 +18,11 @@ string Avara::buscarSolucion(Nodo *estadoInicial)
     {
         while(!listaTmp->empty())
         {
-            if(!set.contains(QString::fromStdString(listaTmp->front()->getEstadoString())))
-            {
+//            if(!set.contains(QString::fromStdString(listaTmp->front()->getEstadoString())))
+//            {
                 miCola->push(listaTmp->front());
                 set.insert(QString::fromStdString(listaTmp->front()->getEstadoString()));
-            }
+//            }
             listaTmp->pop_front();
         }
         actual=miCola->top();
