@@ -29,6 +29,7 @@ Ventana::Ventana(QWidget *parent) :
     ui->radioButtonInformed->setEnabled(false);
     ui->radioButtonUninformed->setEnabled(false);
     ui->comboBoxAlgoritmos->setEnabled(false);
+//    ui->textEdit->setEnabled(false);
 
     connect(ui->actionQuit, SIGNAL(triggered()),this,SLOT(close()));
     connect(ui->botonRun,SIGNAL(clicked()),this,SLOT(correr()));
@@ -175,9 +176,16 @@ void Ventana::correr()
         miAgente->serMatrizInicial(matriz);
         miAgente->run();
         paraMover= miAgente->getSolucion();
+
+        cout<< "Para mover: "<< paraMover<<endl;
+
         pos=paraMover.find_first_of(".");
         datos=paraMover.substr(pos+1,(paraMover.size()-pos));
         paraMover=paraMover.substr(0,pos);
+
+        cout<< "Para mover: "<< paraMover<<endl;
+        cout << "Datos: " << datos<< endl;
+
         mapita->iniciarAnimacion(paraMover,direcciones);
         return;
     }
@@ -188,9 +196,16 @@ void Ventana::correr()
         miAgente->serMatrizInicial(matriz);
         miAgente->run();
         paraMover= miAgente->getSolucion();
+
+        cout<< "Para mover: "<< paraMover<<endl;
+
         pos=paraMover.find_first_of(".");
         datos=paraMover.substr(pos+1,(paraMover.size()-pos));
         paraMover=paraMover.substr(0,pos);
+
+        cout<< "Para mover: "<< paraMover<<endl;
+        cout << "Datos: " << datos<< endl;
+
         mapita->iniciarAnimacion(paraMover,direcciones);
         return;
     }
@@ -201,9 +216,16 @@ void Ventana::correr()
         miAgente->serMatrizInicial(matriz);
         miAgente->run();
         paraMover= miAgente->getSolucion();
+
+        cout<< "Para mover: "<< paraMover<<endl;
+
         pos=paraMover.find_first_of(".");
         datos=paraMover.substr(pos+1,(paraMover.size()-pos));
         paraMover=paraMover.substr(0,pos);
+
+        cout<< "Para mover: "<< paraMover<<endl;
+        cout << "Datos: " << datos<< endl;
+
         mapita->iniciarAnimacion(paraMover,direcciones);
         return;
     }
@@ -217,6 +239,13 @@ void Ventana::correr()
         pos=paraMover.find_first_of(".");
         datos=paraMover.substr(pos+1,(paraMover.size()-pos));
         paraMover=paraMover.substr(0,pos);
+
+        cout<< "Para mover: "<< paraMover<<endl;
+        cout << "Datos: " << datos<< endl;
+
+        mostrarDatos(QString::fromStdString(paraMover), 0);
+        mostrarDatos(QString::fromStdString(datos), 1);
+
         mapita->iniciarAnimacion(paraMover,direcciones);
         return;
     }
@@ -227,13 +256,68 @@ void Ventana::correr()
         miAgente->serMatrizInicial(matriz);
         miAgente->run();
         paraMover= miAgente->getSolucion();
+
+        cout<< "Para mover: "<< paraMover<<endl;
+
         pos=paraMover.find_first_of(".");
         datos=paraMover.substr(pos+1,(paraMover.size()-pos));
         paraMover=paraMover.substr(0,pos);
+
+        cout<< "Para mover: "<< paraMover<<endl;
+        cout << "Datos: " << datos<< endl;
+
         mapita->iniciarAnimacion(paraMover,direcciones);
         return;
     }
+}
 
-
-
+void Ventana::mostrarDatos(QString aMostrar, int que)
+{
+    QString seccion;
+    QString carro;
+    QString linea;
+    int largo=aMostrar.size();
+    int i=0;
+    if(que==0)
+    {
+        while(i<largo)
+        {
+            linea="";
+            seccion=aMostrar.left(3);
+            carro=seccion.left(1);
+            linea.append(carro+" ");
+            seccion=seccion.right(2);
+            if(direcciones[carro.toLocal8Bit().data()[0]]) //M. Vertical
+            {
+                if((seccion.left(1)).toLocal8Bit().data()[0] == 1) //Arriba
+                {
+                   linea.append("↑ ");
+                }
+                else //Abajo
+                {
+                    linea.append("↓ ");
+                }
+            }
+            else //M. Horizontal
+            {
+                if((seccion.left(1)).toLocal8Bit().data()[0] == 1) //Derecha
+                {
+                    linea.append("→ ");
+                }
+                else //Izquierda
+                {
+                   linea.append("← ");
+                }
+            }
+            seccion=seccion.right(1);
+            linea.append(seccion);
+            ui->textEdit->append(linea);
+            i+=3;
+            aMostrar=aMostrar.right(aMostrar.size()-3);
+        }
+    }
+    else
+    {
+        //Falta colocar los datos
+    }
 }
