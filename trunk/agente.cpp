@@ -41,32 +41,32 @@ void Agente::run()
     case 0:
         inicio->setHeuristica(ptrAmplitud->calcularHeuristica(matrizInicial));
         ruta= ptrAmplitud->buscarSolucion(inicio);
-    //    ruta+=".";
-    //    ruta+=ptrAmplitud->sacarDatos();
+        ruta+=".";
+        ruta+=ptrAmplitud->sacarDatos();
         break;
     case 1:
         inicio->setHeuristica(ptrCostoUniforme->calcularHeuristica(matrizInicial));
         ruta= ptrCostoUniforme->buscarSolucion(inicio);
-    //    ruta+=".";
-    //    ruta+=ptrCostoUniforme->sacarDatos();
+        ruta+=".";
+        ruta+=ptrCostoUniforme->sacarDatos();
         break;
     case 2:
         inicio->setHeuristica(ptrProfundidadEvitandoCiclos->calcularHeuristica(matrizInicial));
         ruta= ptrProfundidadEvitandoCiclos->buscarSolucion(inicio);
-    //    ruta+=".";
-    //    ruta+=ptrProfundidadEvitandoCiclos->sacarDatos();
+        ruta+=".";
+        ruta+=ptrProfundidadEvitandoCiclos->sacarDatos();
         break;
     case 3:
         inicio->setHeuristica(ptrAvara->calcularHeuristica(matrizInicial));
         ruta= ptrAvara->buscarSolucion(inicio);
-    //    ruta+=".";
-    //    ruta+=ptrAvara->sacarDatos();
+        ruta+=".";
+        ruta+=ptrAvara->sacarDatos();
         break;
     case 4:
         inicio->setHeuristica(ptrAEstrella->calcularHeuristica(matrizInicial));
         ruta= ptrAEstrella->buscarSolucion(inicio);
-    //    ruta+=".";
-    //    ruta+=ptrAEstrella->sacarDatos();
+        ruta+=".";
+        ruta+=ptrAEstrella->sacarDatos();
         break;
     default: break;
     }

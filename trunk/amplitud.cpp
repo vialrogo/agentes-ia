@@ -11,6 +11,7 @@ Amplitud::Amplitud(bool *dirIn) : Algoritmos(dirIn)
 
 string Amplitud::buscarSolucion(Nodo *estadoInicial)
 {
+    clock_t tIni=clock();
     Nodo *actual=estadoInicial;
 //    cout<<actual->getHeuristica()<<" ";
     set.insert(QString::fromStdString(actual->getEstadoString()));
@@ -18,6 +19,8 @@ string Amplitud::buscarSolucion(Nodo *estadoInicial)
     list<Nodo*> *listaTmp=new list<Nodo*>();
 
     listaTmp =expandir(actual);
+    expandidos=1;
+    altura=actual->getProfundidad();
     while(listaTmp!=0)
     {
         while(!listaTmp->empty())
@@ -25,6 +28,7 @@ string Amplitud::buscarSolucion(Nodo *estadoInicial)
 //            if(!(listaTmp->front()->esIgualA(actual->getPadre())))
             if(!set.contains(QString::fromStdString(listaTmp->front()->getEstadoString())))
             {
+                altura=(listaTmp->front()->getProfundidad() > altura)? listaTmp->front()->getProfundidad(): altura;
                 miCola->enqueue(listaTmp->front());
                 set.insert(QString::fromStdString(listaTmp->front()->getEstadoString()));
             }
@@ -35,7 +39,11 @@ string Amplitud::buscarSolucion(Nodo *estadoInicial)
 //        cout<<miCola->size()<<endl;
         listaTmp=0;
         listaTmp =expandir(actual);
+        expandidos++;
     }
+
+    clock_t tFin= clock();
+    tiempoComputo=(double) (tFin - tIni)/CLOCKS_PER_SEC;
 
     return actual->getOperadorAplicado();
 }
