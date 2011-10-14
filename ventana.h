@@ -25,9 +25,7 @@ class Ventana : public QMainWindow
 {
     Q_OBJECT
 
-public:
-    explicit Ventana(QWidget *parent = 0);
-    ~Ventana();
+private:
     Mapa* mapita;
     int W;
     int H;
@@ -36,14 +34,19 @@ public:
     int cantidadCarros;
     bool IsMapaCargado; //Global para saber si ya se cargó un mapa
     QString nombreProjecto; //Es variable para que aparezca igual en about
-
-private:
-    Ui::Ventana *ui;
-    void borrarMapa();
-    void pintarCuadricula(int n, int m);
+    bool corriendo;
     char** matriz;
     bool* direcciones;
     Agente *miAgente;
+
+public:
+    explicit Ventana(QWidget *parent = 0);
+    ~Ventana();
+    Ui::Ventana *ui;
+    void borrarMapa();
+    void pintarCuadricula(int n, int m);
+    void mostrarDatos(QString aMostrar, int que);//0 para los pasos, 1 para los datos
+
 public slots:
     void correr();
     void cargarArchivo();
