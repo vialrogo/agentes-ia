@@ -11,19 +11,22 @@ ProfundidadEvitandoCiclos::ProfundidadEvitandoCiclos(bool *dirIn) : Algoritmos(d
 
 string ProfundidadEvitandoCiclos::buscarSolucion(Nodo* estadoInicial)
 {
+    clock_t tIni=clock();
     Nodo *actual=estadoInicial;
     set.insert(QString::fromStdString(actual->getEstadoString()));
     QStack <Nodo*> *miPila= new QStack<Nodo*>();
     list<Nodo*> *listaTmp=new list<Nodo*>();
 
     listaTmp=expandir(actual);
-
+    expandidos=1;
+    altura=actual->getProfundidad();
     while(listaTmp!=0)
     {
         while(!listaTmp->empty())
         {
             if(!set.contains(QString::fromStdString(listaTmp->back()->getEstadoString())))
             {
+                altura=(listaTmp->front()->getProfundidad() > altura)? listaTmp->front()->getProfundidad(): altura;
                 miPila->push(listaTmp->back());
                 set.insert(QString::fromStdString(listaTmp->back()->getEstadoString()));
             }
@@ -33,7 +36,12 @@ string ProfundidadEvitandoCiclos::buscarSolucion(Nodo* estadoInicial)
 //        cout<<miPila->size()<<endl;
         listaTmp=0;
         listaTmp=expandir(actual);
+        expandidos++;
     }
+
+    clock_t tFin= clock();
+    tiempoComputo=(double) (tFin - tIni)/CLOCKS_PER_SEC;
+
     return actual->getOperadorAplicado(); //Ventana se encarga de traducir ese string :P
 }
 

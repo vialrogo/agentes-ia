@@ -175,7 +175,9 @@ void Ventana::correr()
         miAgente->serMatrizInicial(matriz);
         miAgente->run();
         paraMover= miAgente->getSolucion();
-        cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
+        pos=paraMover.find_first_of(".");
+        datos=paraMover.substr(pos+1,(paraMover.size()-pos));
+        paraMover=paraMover.substr(0,pos);
         mapita->iniciarAnimacion(paraMover,direcciones);
         return;
     }
@@ -186,7 +188,9 @@ void Ventana::correr()
         miAgente->serMatrizInicial(matriz);
         miAgente->run();
         paraMover= miAgente->getSolucion();
-        cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
+        pos=paraMover.find_first_of(".");
+        datos=paraMover.substr(pos+1,(paraMover.size()-pos));
+        paraMover=paraMover.substr(0,pos);
         mapita->iniciarAnimacion(paraMover,direcciones);
         return;
     }
@@ -197,7 +201,9 @@ void Ventana::correr()
         miAgente->serMatrizInicial(matriz);
         miAgente->run();
         paraMover= miAgente->getSolucion();
-        cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
+        pos=paraMover.find_first_of(".");
+        datos=paraMover.substr(pos+1,(paraMover.size()-pos));
+        paraMover=paraMover.substr(0,pos);
         mapita->iniciarAnimacion(paraMover,direcciones);
         return;
     }
@@ -208,7 +214,9 @@ void Ventana::correr()
         miAgente->serMatrizInicial(matriz);
         miAgente->run();
         paraMover= miAgente->getSolucion();
-        cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
+        pos=paraMover.find_first_of(".");
+        datos=paraMover.substr(pos+1,(paraMover.size()-pos));
+        paraMover=paraMover.substr(0,pos);
         mapita->iniciarAnimacion(paraMover,direcciones);
         return;
     }
@@ -219,10 +227,13 @@ void Ventana::correr()
         miAgente->serMatrizInicial(matriz);
         miAgente->run();
         paraMover= miAgente->getSolucion();
-        cout<< paraMover << endl; //Quitar cuadno se implemente el movimiento bonito
+        pos=paraMover.find_first_of(".");
+        datos=paraMover.substr(pos+1,(paraMover.size()-pos));
+        paraMover=paraMover.substr(0,pos);
         mapita->iniciarAnimacion(paraMover,direcciones);
         return;
     }
+
 
 
 }
