@@ -72,7 +72,6 @@ void Agente::run()
     }
 
     solucion=ruta;
-    emit finished();
 }
 
 void Agente::setCual(int cual_in)
@@ -80,7 +79,7 @@ void Agente::setCual(int cual_in)
     cual=cual_in;
 }
 
-void Agente::serMatrizInicial(char **matrizInicial_in)
+void Agente::setMatrizInicial(char **matrizInicial_in)
 {
     matrizInicial=matrizInicial_in;
 }

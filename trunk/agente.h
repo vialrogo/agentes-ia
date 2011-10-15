@@ -27,7 +27,7 @@ public:
     void setDireciones(bool *dirIn);
     void run();
     void setCual(int cual_in);
-    void serMatrizInicial(char** matrizInicial_in);
+    void setMatrizInicial(char** matrizInicial_in);
     string getSolucion();
 };
 
