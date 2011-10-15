@@ -23,6 +23,7 @@ public:
     void crearCuadros(char** matriz, bool* direcciones);
     void moverCarro(char carro, int direccion);
     void iniciarAnimacion(string solucion,bool *direcciones);
+    void pararAnimacion();
 
 private:
     int W;
@@ -41,5 +42,8 @@ private:
 
 private slots:
     void animar();
+
+signals:
+    void terminoAnimacion();
 };
 #endif // MAPA_H

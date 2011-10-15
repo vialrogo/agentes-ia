@@ -76,6 +76,7 @@ void Mapa::animar()
     if(0 == solucion.size() && 0 == tiempo )
     {
         timer->stop();
+        emit terminoAnimacion();
     }
     else
     {
@@ -137,4 +138,9 @@ void Mapa::moverCarro(char carro, int direccion)
             posicionesCarro[NumeroCarro].setX( (-1*anchoCelda) + posX );
         }
     }
+}
+
+void Mapa::pararAnimacion()
+{
+    timer->stop();
 }
