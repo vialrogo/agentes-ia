@@ -15,6 +15,7 @@ Ventana::Ventana(QWidget *parent) :
     cantidadCarros = 7;
     W=455; //65
     H=455; //65
+    corriendo=false;
     mapita = new Mapa(W,H,N,M,cantidadCarros+1);
     mapita->setSceneRect(0,0,W,H);
     ui->graphicsView->setScene(mapita);
@@ -37,6 +38,8 @@ Ventana::Ventana(QWidget *parent) :
     connect(ui->radioButtonInformed, SIGNAL(clicked()),this,SLOT(cargarComboBoxInfor()));
     connect(ui->radioButtonUninformed, SIGNAL(clicked()),this,SLOT(cargarComboBoxUninfor()));
     connect(ui->actionAbout,SIGNAL(triggered()),this,SLOT(acercaDe()));
+    connect(mapita, SIGNAL(terminoAnimacion()),this,SLOT(terminarAnimacion()));
+    connect(miAgente, SIGNAL(finished()),this, SLOT(terminoHilo()));
 }
 
 Ventana::~Ventana()
@@ -72,52 +75,56 @@ void Ventana::pintarCuadricula(int n, int m)
 }
 
 void Ventana::cargarArchivo()
-{
-    pintarCuadricula(N,M);
+{ 
     QString rutaArchivo = QFileDialog::getOpenFileName();
-    ifstream infile(qPrintable(rutaArchivo));
 
-    matriz= new char*[N];
-    for (int i = 0; i < N; ++i)
-        matriz[i]=new char[M];
+    if(rutaArchivo!=NULL)
+    {
+        pintarCuadricula(N,M);
+        ifstream infile(qPrintable(rutaArchivo));
 
-    direcciones= new bool[cantidadCarros];
-    for (int i = 0; i < cantidadCarros; ++i)
-        direcciones[i]=true;
+        matriz= new char*[N];
+        for (int i = 0; i < N; ++i)
+            matriz[i]=new char[M];
 
-    for(int i=0; i<N; i++){
-        for(int j=0; j<M; j++){
-               infile >> matriz[i][j];
-        }
-    }
-    char tmp=' ';
-    for (int i = 0; i < N; ++i) {
-        for (int j = 0; j < M; ++j) {
-            if(tmp == matriz[i][j] && tmp != '0' && tmp!='1'){
-                direcciones[tmp-65]=false;
+        direcciones= new bool[cantidadCarros];
+        for (int i = 0; i < cantidadCarros; ++i)
+            direcciones[i]=true;
+
+        for(int i=0; i<N; i++){
+            for(int j=0; j<M; j++){
+                   infile >> matriz[i][j];
             }
-            tmp = matriz[i][j];
         }
+        char tmp=' ';
+        for (int i = 0; i < N; ++i) {
+            for (int j = 0; j < M; ++j) {
+                if(tmp == matriz[i][j] && tmp != '0' && tmp!='1'){
+                    direcciones[tmp-65]=false;
+                }
+                tmp = matriz[i][j];
+            }
+        }
+        mapita->crearCuadros(matriz,direcciones);
+
+        IsMapaCargado=true;
+        ui->radioButtonInformed->setEnabled(true);
+        ui->radioButtonUninformed->setEnabled(true);
+        ui->botonRun->setEnabled(false);
+
+        while(ui->comboBoxAlgoritmos->count()>0)
+            ui->comboBoxAlgoritmos->removeItem(0);
+        ui->comboBoxAlgoritmos->addItem("Select type of algorithm");
+        ui->comboBoxAlgoritmos->setEnabled(false);
+
+        ui->radioButtonInformed->setAutoExclusive(false);
+        ui->radioButtonUninformed->setAutoExclusive(false);
+        ui->radioButtonInformed->setChecked(false);
+        ui->radioButtonUninformed->setChecked(false);
+        ui->radioButtonInformed->setAutoExclusive(true);
+        ui->radioButtonUninformed->setAutoExclusive(true);
+        miAgente->setDireciones(direcciones);
     }
-    mapita->crearCuadros(matriz,direcciones);
-
-    IsMapaCargado=true;
-    ui->radioButtonInformed->setEnabled(true);
-    ui->radioButtonUninformed->setEnabled(true);
-    ui->botonRun->setEnabled(false);
-
-    while(ui->comboBoxAlgoritmos->count()>0)
-        ui->comboBoxAlgoritmos->removeItem(0);
-    ui->comboBoxAlgoritmos->addItem("Select type of algorithm");
-    ui->comboBoxAlgoritmos->setEnabled(false);
-
-    ui->radioButtonInformed->setAutoExclusive(false);
-    ui->radioButtonUninformed->setAutoExclusive(false);
-    ui->radioButtonInformed->setChecked(false);
-    ui->radioButtonUninformed->setChecked(false);
-    ui->radioButtonInformed->setAutoExclusive(true);
-    ui->radioButtonUninformed->setAutoExclusive(true);
-    miAgente->setDireciones(direcciones);
 }
 
 void Ventana::cargarComboBoxInfor()
@@ -162,112 +169,38 @@ void Ventana::acercaDe()
 
 void Ventana::correr()
 {
-    QString Algoritmo = ui->comboBoxAlgoritmos->currentText();
-    string paraMover="";
-    size_t pos=0;
-    string datos="";
-    ui->radioButtonInformed->setEnabled(false);
-    ui->radioButtonUninformed->setEnabled(false);
-    ui->comboBoxAlgoritmos->setEnabled(false);
-
-    if(Algoritmo=="Breadth-first search")
+    if(corriendo)
     {
-        miAgente->setCual(0);
-        miAgente->serMatrizInicial(matriz);
-        miAgente->run();
-        paraMover= miAgente->getSolucion();
-
-        cout<< "Para mover: "<< paraMover<<endl;
-
-        pos=paraMover.find_first_of(".");
-        datos=paraMover.substr(pos+1,(paraMover.size()-pos));
-        paraMover=paraMover.substr(0,pos);
-
-        cout<< "Para mover: "<< paraMover<<endl;
-        cout << "Datos: " << datos<< endl;
-
-        mapita->iniciarAnimacion(paraMover,direcciones);
-        return;
+        terminarAnimacion();
     }
-
-    if(Algoritmo=="Uniform-cost search")
+    else
     {
-        miAgente->setCual(1);
+        QString Algoritmo = ui->comboBoxAlgoritmos->currentText();
         miAgente->serMatrizInicial(matriz);
-        miAgente->run();
-        paraMover= miAgente->getSolucion();
+        corriendo=true;
 
-        cout<< "Para mover: "<< paraMover<<endl;
+        ui->textEdit->clear();
+        ui->botonRun->setText("Stop");
+        ui->radioButtonInformed->setEnabled(false);
+        ui->radioButtonUninformed->setEnabled(false);
+        ui->comboBoxAlgoritmos->setEnabled(false);
 
-        pos=paraMover.find_first_of(".");
-        datos=paraMover.substr(pos+1,(paraMover.size()-pos));
-        paraMover=paraMover.substr(0,pos);
+        if(Algoritmo=="Breadth-first search")
+            miAgente->setCual(0);
 
-        cout<< "Para mover: "<< paraMover<<endl;
-        cout << "Datos: " << datos<< endl;
+        if(Algoritmo=="Uniform-cost search")
+            miAgente->setCual(1);
 
-        mapita->iniciarAnimacion(paraMover,direcciones);
-        return;
-    }
+        if(Algoritmo=="Depth-first search (avoiding cycles)")
+            miAgente->setCual(2);
 
-    if(Algoritmo=="Depth-first search (avoiding cycles)")
-    {
-        miAgente->setCual(2);
-        miAgente->serMatrizInicial(matriz);
-        miAgente->run();
-        paraMover= miAgente->getSolucion();
+        if(Algoritmo=="Greedy algorithm")
+            miAgente->setCual(3);
 
-        cout<< "Para mover: "<< paraMover<<endl;
+        if(Algoritmo=="A*")
+            miAgente->setCual(4);
 
-        pos=paraMover.find_first_of(".");
-        datos=paraMover.substr(pos+1,(paraMover.size()-pos));
-        paraMover=paraMover.substr(0,pos);
-
-        cout<< "Para mover: "<< paraMover<<endl;
-        cout << "Datos: " << datos<< endl;
-
-        mapita->iniciarAnimacion(paraMover,direcciones);
-        return;
-    }
-
-    if(Algoritmo=="Greedy algorithm")
-    {
-        miAgente->setCual(3);
-        miAgente->serMatrizInicial(matriz);
-        miAgente->run();
-        paraMover= miAgente->getSolucion();
-        pos=paraMover.find_first_of(".");
-        datos=paraMover.substr(pos+1,(paraMover.size()-pos));
-        paraMover=paraMover.substr(0,pos);
-
-        cout<< "Para mover: "<< paraMover<<endl;
-        cout << "Datos: " << datos<< endl;
-
-        mostrarDatos(QString::fromStdString(paraMover), 0);
-        mostrarDatos(QString::fromStdString(datos), 1);
-
-        mapita->iniciarAnimacion(paraMover,direcciones);
-        return;
-    }
-
-    if(Algoritmo=="A*")
-    {
-        miAgente->setCual(4);
-        miAgente->serMatrizInicial(matriz);
-        miAgente->run();
-        paraMover= miAgente->getSolucion();
-
-        cout<< "Para mover: "<< paraMover<<endl;
-
-        pos=paraMover.find_first_of(".");
-        datos=paraMover.substr(pos+1,(paraMover.size()-pos));
-        paraMover=paraMover.substr(0,pos);
-
-        cout<< "Para mover: "<< paraMover<<endl;
-        cout << "Datos: " << datos<< endl;
-
-        mapita->iniciarAnimacion(paraMover,direcciones);
-        return;
+        miAgente->start();
     }
 }
 
@@ -320,4 +253,39 @@ void Ventana::mostrarDatos(QString aMostrar, int que)
     {
         //Falta colocar los datos
     }
+}
+
+void Ventana::terminarAnimacion()
+{
+    corriendo=false;
+    ui->botonRun->setText("Run");
+    miAgente->terminate();                   // <= esto aún no funciona bien!!
+    mapita->pararAnimacion();
+
+    ui->radioButtonInformed->setEnabled(false);
+    ui->radioButtonUninformed->setEnabled(false);
+    ui->comboBoxAlgoritmos->setEnabled(false);
+    ui->botonRun->setEnabled(false);
+}
+
+void Ventana::terminoHilo()
+{
+    cout<<"Termino la ejecucion del hilo!!!!!!!!"<<endl;
+
+    string paraMover="";
+    size_t pos=0;
+    string datos="";
+
+    paraMover= miAgente->getSolucion();
+    pos=paraMover.find_first_of(".");
+    datos=paraMover.substr(pos+1,(paraMover.size()-pos));
+    paraMover=paraMover.substr(0,pos);
+
+    cout<< "Para mover: "<< paraMover<<endl;
+    cout << "Datos: " << datos<< endl;
+
+    mostrarDatos(QString::fromStdString(paraMover), 0);
+    mostrarDatos(QString::fromStdString(datos), 1);
+
+    mapita->iniciarAnimacion(paraMover,direcciones);
 }

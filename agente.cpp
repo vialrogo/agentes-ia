@@ -72,6 +72,7 @@ void Agente::run()
     }
 
     solucion=ruta;
+    emit finished();
 }
 
 void Agente::setCual(int cual_in)
@@ -88,3 +89,4 @@ string Agente::getSolucion()
 {
     return solucion;
 }
+

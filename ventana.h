@@ -53,6 +53,8 @@ public slots:
     void cargarComboBoxInfor();
     void cargarComboBoxUninfor();
     void acercaDe();
+    void terminarAnimacion();
+    void terminoHilo();
 };
 
 #endif // VENTANA_H
