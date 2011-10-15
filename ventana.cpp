@@ -176,7 +176,7 @@ void Ventana::correr()
     else
     {
         QString Algoritmo = ui->comboBoxAlgoritmos->currentText();
-        miAgente->serMatrizInicial(matriz);
+        miAgente->setMatrizInicial(matriz);
         corriendo=true;
 
         ui->textEdit->clear();
@@ -251,7 +251,20 @@ void Ventana::mostrarDatos(QString aMostrar, int que)
     }
     else
     {
-        //Falta colocar los datos
+        linea="Cantidad de nodos expandidos: ";
+        largo=aMostrar.indexOf(" ");
+        linea.append(aMostrar.left(largo));
+        ui->textEdit->append(linea);
+        aMostrar=aMostrar.right(aMostrar.size()-(largo+1));
+        linea="Profundidad del árbol: ";
+        largo=aMostrar.indexOf(" ");
+        linea.append(aMostrar.left(largo));
+        ui->textEdit->append(linea);
+        aMostrar=aMostrar.right(aMostrar.size()-(largo+1));
+        linea="Tiempo de Cómputo: ";
+        linea.append(aMostrar);
+        linea.append(" segundos");
+        ui->textEdit->append(linea);
     }
 }
 
