@@ -8,6 +8,8 @@ Agente::Agente() : QThread()
 
 Agente::~Agente()
 {
+    cout<<"Se destruye el agente!"<<endl;
+
     ptrAmplitud = 0;
     ptrCostoUniforme = 0;
     ptrProfundidadEvitandoCiclos = 0;
@@ -20,15 +22,20 @@ Agente::~Agente()
     delete ptrAEstrella;
 }
 
-void Agente::setDireciones(bool *dirIn)
+void Agente::inicializarTodo(bool *dirIn)
 {
-    for (int var = 0; var < 7; var++) direcciones[var]=dirIn[var];
-
     ptrAmplitud = new Amplitud(dirIn);
     ptrCostoUniforme = new CostoUniforme(dirIn);
     ptrProfundidadEvitandoCiclos = new ProfundidadEvitandoCiclos(dirIn);
     ptrAvara = new Avara(dirIn);
     ptrAEstrella = new AEstrella(dirIn);
+
+    setMaximoNodosTodosAlgoritmos(2000000); //Valor por defecto, toca ver si va a ser cambiable sin recompilar!
+}
+
+void Agente::setDireciones(bool *dirIn)
+{
+    for (int var = 0; var < 7; var++) direcciones[var]=dirIn[var];
 }
 
 void Agente::run()
@@ -39,30 +46,35 @@ void Agente::run()
     switch(cual)
     {
     case 0:
+        ptrAmplitud->setPararHilo(false);
         inicio->setHeuristica(ptrAmplitud->calcularHeuristica(matrizInicial));
         ruta= ptrAmplitud->buscarSolucion(inicio);
         ruta+=".";
         ruta+=ptrAmplitud->sacarDatos();
         break;
     case 1:
+        ptrCostoUniforme->setPararHilo(false);
         inicio->setHeuristica(ptrCostoUniforme->calcularHeuristica(matrizInicial));
         ruta= ptrCostoUniforme->buscarSolucion(inicio);
         ruta+=".";
         ruta+=ptrCostoUniforme->sacarDatos();
         break;
     case 2:
+        ptrProfundidadEvitandoCiclos->setPararHilo(false);
         inicio->setHeuristica(ptrProfundidadEvitandoCiclos->calcularHeuristica(matrizInicial));
         ruta= ptrProfundidadEvitandoCiclos->buscarSolucion(inicio);
         ruta+=".";
         ruta+=ptrProfundidadEvitandoCiclos->sacarDatos();
         break;
     case 3:
+        ptrAvara->setPararHilo(false);
         inicio->setHeuristica(ptrAvara->calcularHeuristica(matrizInicial));
         ruta= ptrAvara->buscarSolucion(inicio);
         ruta+=".";
         ruta+=ptrAvara->sacarDatos();
         break;
     case 4:
+        ptrAEstrella->setPararHilo(false);
         inicio->setHeuristica(ptrAEstrella->calcularHeuristica(matrizInicial));
         ruta= ptrAEstrella->buscarSolucion(inicio);
         ruta+=".";
@@ -87,5 +99,37 @@ void Agente::setMatrizInicial(char **matrizInicial_in)
 string Agente::getSolucion()
 {
     return solucion;
+}
+
+void Agente::pararHilo()
+{
+    switch(cual)
+    {
+    case 0:
+        ptrAmplitud->setPararHilo(true);
+        break;
+    case 1:
+        ptrCostoUniforme->setPararHilo(true);
+        break;
+    case 2:
+        ptrProfundidadEvitandoCiclos->setPararHilo(true);
+        break;
+    case 3:
+        ptrAvara->setPararHilo(true);
+        break;
+    case 4:
+        ptrAEstrella->setPararHilo(true);
+        break;
+    default: break;
+    }
+}
+
+void Agente::setMaximoNodosTodosAlgoritmos(int MN_in)
+{
+    ptrAmplitud->setMaximoNodos(MN_in);
+    ptrCostoUniforme->setMaximoNodos(MN_in);
+    ptrProfundidadEvitandoCiclos->setMaximoNodos(MN_in);
+    ptrAvara->setMaximoNodos(MN_in);
+    ptrAEstrella->setMaximoNodos(MN_in);
 }
 

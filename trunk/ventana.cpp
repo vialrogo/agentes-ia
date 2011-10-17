@@ -39,7 +39,6 @@ Ventana::Ventana(QWidget *parent) :
     connect(ui->radioButtonUninformed, SIGNAL(clicked()),this,SLOT(cargarComboBoxUninfor()));
     connect(ui->actionAbout,SIGNAL(triggered()),this,SLOT(acercaDe()));
     connect(mapita, SIGNAL(terminoAnimacion()),this,SLOT(terminarAnimacion()));
-    connect(miAgente, SIGNAL(finished()),this, SLOT(terminoHilo()));
 }
 
 Ventana::~Ventana()
@@ -76,6 +75,8 @@ void Ventana::pintarCuadricula(int n, int m)
 
 void Ventana::cargarArchivo()
 { 
+    terminarAnimacion();
+    ui->textEdit->clear();
     QString rutaArchivo = QFileDialog::getOpenFileName();
 
     if(rutaArchivo!=NULL)
@@ -123,8 +124,17 @@ void Ventana::cargarArchivo()
         ui->radioButtonUninformed->setChecked(false);
         ui->radioButtonInformed->setAutoExclusive(true);
         ui->radioButtonUninformed->setAutoExclusive(true);
-        miAgente->setDireciones(direcciones);
     }
+
+    //Destruye el agente y lo vuelve a inicializar
+//    miAgente=0;
+    delete miAgente;
+
+    miAgente=new Agente();
+    connect(miAgente, SIGNAL(finished()),this, SLOT(terminoHilo()));
+
+    miAgente->inicializarTodo(direcciones);
+    miAgente->setDireciones(direcciones);
 }
 
 void Ventana::cargarComboBoxInfor()
@@ -220,7 +230,7 @@ void Ventana::mostrarDatos(QString aMostrar, int que)
             carro=seccion.left(1);
             linea.append(carro+" ");
             seccion=seccion.right(2);
-            if(direcciones[carro.toLocal8Bit().data()[0]]) //M. Vertical
+            if(direcciones[(int)(carro.toLocal8Bit().data()[0])]) //M. Vertical
             {
                 if((seccion.left(1)).toLocal8Bit().data()[0] == 1) //Arriba
                 {
@@ -272,7 +282,7 @@ void Ventana::terminarAnimacion()
 {
     corriendo=false;
     ui->botonRun->setText("Run");
-    miAgente->terminate();                   // <= esto aún no funciona bien!!
+    miAgente->pararHilo();
     mapita->pararAnimacion();
 
     ui->radioButtonInformed->setEnabled(false);
@@ -290,15 +300,19 @@ void Ventana::terminoHilo()
     string datos="";
 
     paraMover= miAgente->getSolucion();
-    pos=paraMover.find_first_of(".");
-    datos=paraMover.substr(pos+1,(paraMover.size()-pos));
-    paraMover=paraMover.substr(0,pos);
 
-    cout<< "Para mover: "<< paraMover<<endl;
-    cout << "Datos: " << datos<< endl;
+    if(paraMover!="")
+    {
+        pos=paraMover.find_first_of(".");
+        datos=paraMover.substr(pos+1,(paraMover.size()-pos));
+        paraMover=paraMover.substr(0,pos);
 
-    mostrarDatos(QString::fromStdString(paraMover), 0);
-    mostrarDatos(QString::fromStdString(datos), 1);
+        cout<< "Para mover: "<< paraMover<<endl;
+        cout << "Datos: " << datos<< endl;
 
-    mapita->iniciarAnimacion(paraMover,direcciones);
+        mostrarDatos(QString::fromStdString(paraMover), 0);
+        mostrarDatos(QString::fromStdString(datos), 1);
+
+        mapita->iniciarAnimacion(paraMover,direcciones);
+    }
 }

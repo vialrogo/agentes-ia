@@ -9,18 +9,32 @@ Avara::Avara(bool *dirIn) : Algoritmos(dirIn)
     tiempoComputo=0;
 }
 
+Avara::~Avara()
+{
+    direcciones=0;
+    delete direcciones;
+
+    while (miCola->size()!=0)
+    {
+        delete miCola->top();
+        miCola->pop();
+    }
+    delete miCola;
+    delete listaTmp;
+}
+
 string Avara::buscarSolucion(Nodo *estadoInicial)
 {
     clock_t tIni=clock();
     Nodo *actual=estadoInicial;
 //    set.insert(QString::fromStdString(actual->getEstadoString()));
-    priority_queue<Nodo*,vector<Nodo*>,comparaHeuristicas> *miCola = new priority_queue<Nodo*,vector<Nodo*>,comparaHeuristicas>(comparaHeuristicas(true));
-    list<Nodo*> *listaTmp=new list<Nodo*>();
+    miCola = new priority_queue<Nodo*,vector<Nodo*>,comparaHeuristicas>(comparaHeuristicas(true));
+    listaTmp=new list<Nodo*>();
 
     listaTmp =expandir(actual);
     expandidos=1;
     altura=actual->getProfundidad();
-    while(listaTmp!=0)
+    while(listaTmp!=0 && miCola->size()<MAXIMO_NODOS && !pararHilo)
     {
         while(!listaTmp->empty())
         {
@@ -28,18 +42,31 @@ string Avara::buscarSolucion(Nodo *estadoInicial)
             miCola->push(listaTmp->front());
             listaTmp->pop_front();
         }
+        delete listaTmp;
+        delete actual;
+
         actual=miCola->top();
         miCola->pop();
-//        cout<<miCola->size()<<endl;
-        listaTmp=0;
         listaTmp =expandir(actual);
         expandidos++;
     }
-
     clock_t tFin= clock();
     tiempoComputo=(double) (tFin - tIni)/CLOCKS_PER_SEC;
 
-    return actual->getOperadorAplicado();
+    string salida="";
+    if(!pararHilo)
+        salida=actual->getOperadorAplicado();
+
+//    Destruyo todo lo que usé   <- No funciona!!!!!
+    while (miCola->size()!=0)
+    {
+        delete miCola->top();
+        miCola->pop();
+    }
+    delete miCola;
+    delete listaTmp;
+
+    return salida;
 }
 
 string Avara::sacarDatos()

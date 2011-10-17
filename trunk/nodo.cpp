@@ -2,12 +2,21 @@
 
 Nodo::Nodo(char** estadoIn, Nodo *padreIn, string operadorAplicadoIn, int profundidadIn, int costoIn)
 {
+//    estado=(char**) malloc(49*sizeof(char));
     estado=estadoIn;
     padre=padreIn;
     operadorAplicado=operadorAplicadoIn;
     profundidad=profundidadIn;
     costo=costoIn;
     heuristica=0;
+}
+
+Nodo::~Nodo()
+{
+    for(int i = 0; i < 7; i++)
+        delete[] estado[i];
+    delete[] estado;
+
 }
 
 bool Nodo::esIgualA(Nodo *otroNodo)
