@@ -112,6 +112,7 @@ char** Algoritmos::mover(QPoint *posCarro, int direccion, int casillas, char** m
     for (int var = 0; var < 7; var++) {
         matFinal[var]=new char[7];
     }
+
     for (int i = 0; i < 7; i++) {
         for (int j = 0; j < 7; j++) {
             matFinal[i][j]=matActual[i][j];
@@ -261,6 +262,16 @@ int Algoritmos::calcularHeuristica(char** estadoActual)
         else resp+=2;
     }
     return resp;
+}
+
+void Algoritmos::setMaximoNodos(unsigned int MN_in)
+{
+    MAXIMO_NODOS=MN_in;
+}
+
+void Algoritmos::setPararHilo(bool pararHilo_in)
+{
+    pararHilo=pararHilo_in;
 }
 
 //void Algoritmos::imprimir(char** mat)

@@ -22,12 +22,19 @@ private:
     bool esMeta(char** estado);
     QPoint* sePuedeMover(char carro, int direccion, int casillas, char** matActual);
     char** mover(QPoint *posCarro, int direccion, int casillas, char** matActual);
+
+protected:
+    unsigned int MAXIMO_NODOS;
+    bool pararHilo;
+
 public:
     Algoritmos();
     Algoritmos(bool *dirIn);
     list<Nodo*>* expandir(Nodo *nodito);
     int calcularHeuristica(char** estadoActual);
 //    void imprimir(char** mat);
+    void setMaximoNodos(unsigned int MN_in);
+    void setPararHilo(bool pararHilo_in);
 };
 
 #endif // ALGORITMOS_H

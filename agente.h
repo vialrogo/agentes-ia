@@ -24,11 +24,14 @@ private:
 public:
     Agente();
     ~Agente();
+    void inicializarTodo(bool *dirIn);
     void setDireciones(bool *dirIn);
     void run();
     void setCual(int cual_in);
     void setMatrizInicial(char** matrizInicial_in);
     string getSolucion();
+    void pararHilo();
+    void setMaximoNodosTodosAlgoritmos(int MN_in);
 };
 
 #endif // AGENTE_H

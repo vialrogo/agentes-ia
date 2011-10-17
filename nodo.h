@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+
 using namespace std;
 
 class Nodo
@@ -18,6 +19,7 @@ private:
 
 public:
     Nodo(char** estadoIn, Nodo *padreIn, string operadorAplicadoIn, int profundidadIn, int costoIn);
+    ~Nodo();
     char** getEstado() const;
     Nodo* getPadre();
     string getOperadorAplicado();
