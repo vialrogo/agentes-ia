@@ -245,6 +245,8 @@ list<Nodo*>* Algoritmos::expandir(Nodo *nodito)
 
                         respuesta->push_back(tmp);
                     }
+                    delete puntoTmp;
+                    puntoTmp=0;
                 }
             }
         }

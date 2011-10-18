@@ -14,9 +14,9 @@ Nodo::Nodo(char** estadoIn, Nodo *padreIn, string operadorAplicadoIn, int profun
 Nodo::~Nodo()
 {
     for(int i = 0; i < 7; i++)
-        delete[] estado[i];
+        delete estado[i];
     delete[] estado;
-
+    estado=0;
 }
 
 bool Nodo::esIgualA(Nodo *otroNodo)

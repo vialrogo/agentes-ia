@@ -39,6 +39,7 @@ Ventana::Ventana(QWidget *parent) :
     connect(ui->radioButtonUninformed, SIGNAL(clicked()),this,SLOT(cargarComboBoxUninfor()));
     connect(ui->actionAbout,SIGNAL(triggered()),this,SLOT(acercaDe()));
     connect(mapita, SIGNAL(terminoAnimacion()),this,SLOT(terminarAnimacion()));
+    connect(miAgente, SIGNAL(finished()),this, SLOT(terminoHilo()));
 }
 
 Ventana::~Ventana()
@@ -128,13 +129,11 @@ void Ventana::cargarArchivo()
 
     //Destruye el agente y lo vuelve a inicializar
 //    miAgente=0;
-    delete miAgente;
+//    delete miAgente;
 
-    miAgente=new Agente();
-    connect(miAgente, SIGNAL(finished()),this, SLOT(terminoHilo()));
+//    miAgente=new Agente();
 
-    miAgente->inicializarTodo(direcciones);
-    miAgente->setDireciones(direcciones);
+//    miAgente->inicializarTodo(direcciones);
 }
 
 void Ventana::cargarComboBoxInfor()
@@ -179,6 +178,7 @@ void Ventana::acercaDe()
 
 void Ventana::correr()
 {
+    miAgente->setDireciones(direcciones);
     if(corriendo)
     {
         terminarAnimacion();
@@ -196,19 +196,30 @@ void Ventana::correr()
         ui->comboBoxAlgoritmos->setEnabled(false);
 
         if(Algoritmo=="Breadth-first search")
+        {
             miAgente->setCual(0);
-
+            miAgente->inicializar();
+        }
         if(Algoritmo=="Uniform-cost search")
+        {
             miAgente->setCual(1);
-
+            miAgente->inicializar();
+        }
         if(Algoritmo=="Depth-first search (avoiding cycles)")
+        {
             miAgente->setCual(2);
-
+            miAgente->inicializar();
+        }
         if(Algoritmo=="Greedy algorithm")
+        {
             miAgente->setCual(3);
-
+            miAgente->inicializar();
+        }
         if(Algoritmo=="A*")
+        {
             miAgente->setCual(4);
+            miAgente->inicializar();
+        }
 
         miAgente->start();
     }
