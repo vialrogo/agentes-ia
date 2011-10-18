@@ -24,7 +24,7 @@ private:
 public:
     Agente();
     ~Agente();
-    void inicializarTodo(bool *dirIn);
+    void inicializar();
     void setDireciones(bool *dirIn);
     void run();
     void setCual(int cual_in);

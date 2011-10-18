@@ -22,13 +22,26 @@ Agente::~Agente()
     delete ptrAEstrella;
 }
 
-void Agente::inicializarTodo(bool *dirIn)
+void Agente::inicializar()
 {
-    ptrAmplitud = new Amplitud(dirIn);
-    ptrCostoUniforme = new CostoUniforme(dirIn);
-    ptrProfundidadEvitandoCiclos = new ProfundidadEvitandoCiclos(dirIn);
-    ptrAvara = new Avara(dirIn);
-    ptrAEstrella = new AEstrella(dirIn);
+    switch(cual)
+    {
+        case 0:
+            ptrAmplitud = new Amplitud(direcciones);
+            break;
+        case 1:
+            ptrCostoUniforme = new CostoUniforme(direcciones);
+            break;
+        case 2:
+            ptrProfundidadEvitandoCiclos = new ProfundidadEvitandoCiclos(direcciones);
+            break;
+        case 3:
+            ptrAvara = new Avara(direcciones);
+            break;
+        case 4:
+            ptrAEstrella = new AEstrella(direcciones);
+            break;
+    }
 
     setMaximoNodosTodosAlgoritmos(2000000); //Valor por defecto, toca ver si va a ser cambiable sin recompilar!
 }
@@ -126,10 +139,23 @@ void Agente::pararHilo()
 
 void Agente::setMaximoNodosTodosAlgoritmos(int MN_in)
 {
-    ptrAmplitud->setMaximoNodos(MN_in);
-    ptrCostoUniforme->setMaximoNodos(MN_in);
-    ptrProfundidadEvitandoCiclos->setMaximoNodos(MN_in);
-    ptrAvara->setMaximoNodos(MN_in);
-    ptrAEstrella->setMaximoNodos(MN_in);
+    switch(cual)
+    {
+        case 0:
+            ptrAmplitud->setMaximoNodos(MN_in);
+            break;
+        case 1:
+            ptrCostoUniforme->setMaximoNodos(MN_in);
+            break;
+        case 2:
+            ptrProfundidadEvitandoCiclos->setMaximoNodos(MN_in);
+            break;
+        case 3:
+            ptrAvara->setMaximoNodos(MN_in);
+            break;
+        case 4:
+            ptrAEstrella->setMaximoNodos(MN_in);
+            break;
+    }
 }
 

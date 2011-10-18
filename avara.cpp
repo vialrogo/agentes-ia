@@ -20,7 +20,9 @@ Avara::~Avara()
         miCola->pop();
     }
     delete miCola;
+    miCola=0;
     delete listaTmp;
+    listaTmp=0;
 }
 
 string Avara::buscarSolucion(Nodo *estadoInicial)
@@ -64,7 +66,9 @@ string Avara::buscarSolucion(Nodo *estadoInicial)
         miCola->pop();
     }
     delete miCola;
+    miCola=0;
     delete listaTmp;
+    listaTmp=0;
 
     return salida;
 }
