@@ -38,6 +38,7 @@ private:
     char** matriz;
     bool* direcciones;
     Agente *miAgente;
+    int costoRuta;
 
 public:
     explicit Ventana(QWidget *parent = 0);
