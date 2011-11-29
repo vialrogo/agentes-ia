@@ -230,10 +230,13 @@ void Ventana::mostrarDatos(QString aMostrar, int que)
     QString seccion;
     QString carro;
     QString linea;
+    QString tmp;
+    bool ok;
     int largo=aMostrar.size();
     int i=0;
     if(que==0)
     {
+        costoRuta=0;
         while(i<largo)
         {
             linea="";
@@ -263,15 +266,20 @@ void Ventana::mostrarDatos(QString aMostrar, int que)
                    linea.append("← ");
                 }
             }
+            costoRuta+=(seccion.right(1)).toInt(&ok, 10);
             seccion=seccion.right(1);
             linea.append(seccion);
             ui->textEdit->append(linea);
             i+=3;
             aMostrar=aMostrar.right(aMostrar.size()-3);
         }
+        cout<< "Costo de la Ruta:" <<costoRuta<< endl;
     }
     else
     {
+        linea="Costo total de la ruta: ";
+        linea.append(tmp.setNum(costoRuta));
+        ui->textEdit->append(linea);
         linea="Cantidad de nodos expandidos: ";
         largo=aMostrar.indexOf(" ");
         linea.append(aMostrar.left(largo));
