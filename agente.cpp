@@ -43,7 +43,7 @@ void Agente::inicializar()
             break;
     }
 
-    setMaximoNodosTodosAlgoritmos(500000); //Valor por defecto, toca ver si va a ser cambiable sin recompilar!
+    setMaximoNodosTodosAlgoritmos(1000000); //Valor por defecto, toca ver si va a ser cambiable sin recompilar!
 }
 
 void Agente::setDireciones(bool *dirIn)
