@@ -1,0 +1,1 @@
+Tarea y comienzo del proyecto de IA. Se implementarán algunos algoritmos y se crearan métodos de entrada
